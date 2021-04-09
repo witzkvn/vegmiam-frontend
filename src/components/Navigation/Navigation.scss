@@ -1,0 +1,5 @@
+.Navigation-link {
+  &.active {
+    background-image: linear-gradient(to bottom, transparent 0%, transparent 90%, #064e3b 90%, #064e3b 100%);
+  }
+}
