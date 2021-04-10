@@ -1,0 +1,14 @@
+@import "../../theme/all";
+
+.Searchbar {
+  display: flex;
+  width: min-content;
+  box-shadow: $box-shadow;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &__button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

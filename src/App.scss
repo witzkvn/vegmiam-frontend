@@ -1,0 +1,48 @@
+@import "./theme/all";
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-white-dark);
+  display: grid;
+  grid-template-columns: minmax(150px, 300px) 1fr;
+
+  &-offline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__wrapper {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & h1 {
+        margin-bottom: 2rem;
+        font-size: 3rem;
+      }
+
+      & p {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      &--login {
+        margin-top: 2rem;
+      }
+    }
+  }
+
+  &__left {
+    padding: 2rem;
+    padding-right: 0;
+    background-color: var(--bg-white-light);
+    box-shadow: $box-shadow;
+  }
+  &__right {
+    padding: 2rem 4rem;
+    background-color: var(--bg-white-dark);
+  }
+}

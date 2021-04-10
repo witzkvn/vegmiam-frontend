@@ -1,0 +1,61 @@
+@import "./theme/all";
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  color: var(--text-color);
+}
+
+button,
+input,
+textarea,
+select {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  padding: $box-padding;
+  font-size: inherit;
+  color: var(--text-black);
+  border-radius: $radius-md;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-grey);
+}
+
+textarea {
+  resize: none;
+  min-height: 10rem;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $title-font;
+  letter-spacing: 1px;
+}

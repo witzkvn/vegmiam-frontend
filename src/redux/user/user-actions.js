@@ -18,9 +18,9 @@ import { UserActionTypes } from './user-types'
 //   type: UserActionTypes.DELETE_USER_ERRORS,
 // });
 
-// export const setCurrentUser = (user) => ({
-//   type: UserActionTypes.SET_CURRENT_USER,
-//   payload: user,
-// });
+export const setCurrentuser = (user) => ({
+  type: UserActionTypes.SET_CURRENT_USER,
+  payload: user,
+});
 
 

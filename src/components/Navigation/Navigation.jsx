@@ -1,70 +1,71 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { MdAdd, MdTurnedIn, MdPerson } from "react-icons/md";
-import SearchBar from "../SearchBar/SearchBar";
+import { setCurrentuser } from "../../redux/user/user-actions";
 import CustomButton from "../CustomButton/CustomButton";
-import RoundButton from "../RoundButton/RoundButton";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../redux/user/user-selectors";
+import Searchbar from "../Searchbar/Searchbar";
+
 import "./Navigation.scss";
-import DropdownMenu from "../DropdownMenu/DropdownMenu";
-import DropdownLink from "../DropdownMenu/DropdownLink";
 
 const Navigation = () => {
-  const currentUser = useSelector(selectCurrentUser);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const userMenuRef = React.createRef();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target) && userMenuOpen === true) {
-        setUserMenuOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [userMenuOpen, userMenuRef]);
+  const handleLogout = () => {
+    dispatch(setCurrentuser(false));
+  };
+
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const blackLight = getComputedStyle(root).getPropertyValue("--bg-black-light");
+    const blackDark = getComputedStyle(root).getPropertyValue("--bg-black-dark");
+    const whiteLight = getComputedStyle(root).getPropertyValue("--bg-white-light");
+    const whiteDark = getComputedStyle(root).getPropertyValue("--bg-white-dark");
+    const textColor = getComputedStyle(root).getPropertyValue("--text-color");
+    const textWhite = getComputedStyle(root).getPropertyValue("--text-white");
+    const textBlack = getComputedStyle(root).getPropertyValue("--text-black");
+
+    root.style.setProperty("--bg-black-light", whiteLight);
+    root.style.setProperty("--bg-black-dark", whiteDark);
+    root.style.setProperty("--bg-white-light", blackLight);
+    root.style.setProperty("--bg-white-dark", blackDark);
+
+    if (textColor === textWhite) {
+      root.style.setProperty("--text-color", textBlack);
+    } else {
+      root.style.setProperty("--text-color", textWhite);
+    }
+  };
 
   return (
-    <div className="w-full px-4 h-14 text-white bg-green-600 shadow-lg flex justify-between">
-      <div className="flex items-center">
-        <h4 className="pr-6 ">VegMiam</h4>
-        {currentUser ? (
-          <>
-            <NavLink exact to="/" className="px-6 Navigation-link h-full flex items-center">
-              Accueil
-            </NavLink>
-            <NavLink to="/recettes" className="px-6 Navigation-link h-full flex items-center">
-              Recettes
-            </NavLink>
-          </>
-        ) : (
-          ""
-        )}
+    <div className="Navigation">
+      <h1>Vegmiam</h1>
+      <div className="Navigation__links">
+        <NavLink className="Navigation__links--link" exact to="/">
+          Accueil
+        </NavLink>
+        <NavLink className="Navigation__links--link" to="/recettes">
+          Recettes
+        </NavLink>
+        <NavLink className="Navigation__links--link" to="/publier">
+          Publier
+        </NavLink>
+        <NavLink className="Navigation__links--link" to="/favoris">
+          Favoris
+        </NavLink>
+        <NavLink className="Navigation__links--link" to="/compte">
+          Compte
+        </NavLink>
+        <NavLink className="Navigation__links--link" to="/parametres">
+          Paramètres
+        </NavLink>
       </div>
-      {currentUser && <SearchBar />}
-      <div className="flex items-center relative">
-        {currentUser ? (
-          <>
-            <RoundButton className="mx-1">
-              <MdAdd />
-            </RoundButton>
-            <RoundButton className="mx-1">
-              <MdTurnedIn />
-            </RoundButton>
-            <RoundButton className="mx-1" onClick={() => setUserMenuOpen((prevState) => !prevState)}>
-              <MdPerson />
-            </RoundButton>
-          </>
-        ) : (
-          <CustomButton type="secondary">Connexion</CustomButton>
-        )}
+      <div className="Navigation__user">{/* user infos */}</div>
+      <div className="Navigation__deconnexion" onClick={handleLogout}>
+        Déconnexion
       </div>
-      <DropdownMenu open={userMenuOpen} ref={userMenuRef}>
-        <DropdownLink>Compte</DropdownLink>
-      </DropdownMenu>
+      <div className="Navigation__toggle-theme" onClick={toggleTheme}>
+        Changer de thème
+      </div>
     </div>
   );
 };

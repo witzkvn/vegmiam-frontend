@@ -6,7 +6,7 @@ import store from './redux/store';
 import { Router } from 'react-router-dom'
 import history from "./helper/functions/createBrowserHistory"
 // import { authHeader } from "./helper/functions/auth-header"
-import './index.css';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

@@ -1,0 +1,33 @@
+@import "../../theme/all";
+
+.CustomButton {
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  padding: $box-padding;
+  color: var(--text-white);
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: $transition;
+
+  &-primary {
+    background-color: var(--primary-medium);
+    &:hover {
+      background-color: var(--primary-light);
+    }
+    &:active {
+      background-color: var(--primary-dark);
+    }
+  }
+  &-secondary {
+    background-color: var(--secondary-medium);
+    &:hover {
+      background-color: var(--secondary-light);
+    }
+    &:active {
+      background-color: var(--secondary-dark);
+    }
+  }
+}
