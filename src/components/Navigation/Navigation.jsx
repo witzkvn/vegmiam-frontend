@@ -15,12 +15,12 @@ const Navigation = () => {
 
   return (
     <div className="Navigation">
-      <h1>Vegmiam</h1>
+      <NavLink exact to="/">
+        <h1>Vegmiam</h1>
+      </NavLink>
+
       <div className="Navigation__links">
         <NavLink className="Navigation__links--link" exact to="/">
-          Accueil
-        </NavLink>
-        <NavLink className="Navigation__links--link" to="/recettes">
           Recettes
         </NavLink>
         <NavLink className="Navigation__links--link" to="/publier">

@@ -10,6 +10,7 @@
 body {
   font-family: sans-serif;
   color: var(--text-color);
+  overflow: hidden;
 }
 
 button,
@@ -19,7 +20,7 @@ select {
   border: none;
   outline: none;
   font-family: inherit;
-  padding: $box-padding;
+  padding: $padding-box;
   font-size: inherit;
   color: var(--text-black);
   border-radius: $radius-md;

@@ -1,7 +1,16 @@
 import React from "react";
+import RecipeCard from "../RecipeCard/RecipeCard";
 
-const RecipesGrid = () => {
-  return <div className="RecipesGrid"></div>;
+import "./RecipesGrid.scss";
+
+const RecipesGrid = ({ recipes }) => {
+  return (
+    <div className="RecipesGrid">
+      {recipes.map((recette) => (
+        <RecipeCard recipe={recette} />
+      ))}
+    </div>
+  );
 };
 
 export default RecipesGrid;

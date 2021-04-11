@@ -36,13 +36,16 @@
   }
 
   &__left {
-    padding: 2rem;
+    padding: $padding-container;
     padding-right: 0;
     background-color: var(--bg-light);
-    box-shadow: $box-shadow;
+    box-shadow: $shadow-box;
+    max-height: 100vh;
   }
   &__right {
-    padding: 2rem 4rem;
+    padding: $padding-container $padding-container * 2;
     background-color: var(--bg-dark);
+    max-height: 100vh;
+    overflow: auto;
   }
 }

@@ -1,0 +1,10 @@
+@import "../../theme/all";
+
+.RecipesGrid {
+  margin-top: 2rem;
+  padding: $padding-container;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 3rem;
+  justify-content: center;
+}

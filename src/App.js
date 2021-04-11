@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch } from 'react-router';
 import './App.scss';
 import CustomButton from './components/CustomButton/CustomButton';
 import Navigation from './components/Navigation/Navigation';
 import Searchbar from './components/Searchbar/Searchbar';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import { setCurrentUserAction } from './redux/user/user-actions';
 import { selectCurrentUser } from './redux/user/user-selectors';
+import Routes from './Routes';
 
 const App = () => {
   const dispatch = useDispatch()
@@ -37,7 +39,13 @@ const App = () => {
       </div>
       <div className="App__right">
         <Searchbar />
-        <HomePage />
+
+        <Routes />
+        {/* <Switch>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch> */}
 
       </div>
     </div>

@@ -1,10 +1,12 @@
 export const recettes = [
   {
     id: '0s15z5a4d5f2',
-    title: "Lasagnes",
-    difficulty: "medium",
+    title: "Lasagnes aux légumes",
+    description: "Un superbe plat de lasagnes riche en légumes et facile à faire. Redécouvrez une recette classique revisitée aux légumes du soleil. Idéal pour faire le plein d'énergie !",
+    difficulty: "moyenne",
     rating: 4.2,
     time: 50,
+    coverImage: "https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/recipe_photos/original/548/lasagnes-de-legumes-0.jpg",
     images: [
       "https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/recipe_photos/original/548/lasagnes-de-legumes-0.jpg",
       "https://cac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcac.2F2018.2F09.2F25.2F1e5a6bf4-7fc5-4d5f-8baf-1f9a12081497.2Ejpeg/748x372/quality/80/crop-from/center/lasagnes-aux-legumes-grilles-et-pesto-rosso.jpeg",
@@ -14,6 +16,8 @@ export const recettes = [
     themes: [
       'italien', 'pates', 'tomate', 'four'
     ],
+    videoLink: "",
+    otherLinks: [''],
     author: "",
     createdAt: "",
     ingredients: [
@@ -69,5 +73,7 @@ export const recettes = [
         description: "Mettre au four 45 minutes à 170°C."
       },
     ]
-  }
+  },
+
+
 ]

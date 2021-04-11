@@ -1,11 +1,15 @@
 @import "../../theme/all";
 
 .Searchbar {
+  margin-left: auto;
   display: flex;
   width: min-content;
-  box-shadow: $box-shadow;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  box-shadow: $shadow-box;
+
+  & input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 
   &__button {
     border-top-left-radius: 0;

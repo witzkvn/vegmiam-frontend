@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from "axios";
 import { Provider } from 'react-redux'
 import store from './redux/store';
-import { Router } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import history from "./helper/functions/createBrowserHistory"
 // import { authHeader } from "./helper/functions/auth-header"
 import './index.scss';
@@ -44,9 +44,9 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router history={history}>
+      <BrowserRouter history={history}>
         <App />
-      </Router>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
