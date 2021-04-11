@@ -4,7 +4,7 @@ import CustomButton from './components/CustomButton/CustomButton';
 import Navigation from './components/Navigation/Navigation';
 import Searchbar from './components/Searchbar/Searchbar';
 import HomePage from './pages/HomePage';
-import { setCurrentuser } from './redux/user/user-actions';
+import { setCurrentUserAction } from './redux/user/user-actions';
 import { selectCurrentUser } from './redux/user/user-selectors';
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
 
 
   const handleLogin = () => {
-    dispatch(setCurrentuser(true))
+    dispatch(setCurrentUserAction(true))
   }
 
   if (!currentUser) {

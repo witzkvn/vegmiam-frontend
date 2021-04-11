@@ -3,7 +3,7 @@
 .App {
   width: 100vw;
   height: 100vh;
-  background-color: var(--bg-white-dark);
+  background-color: var(--bg-dark);
   display: grid;
   grid-template-columns: minmax(150px, 300px) 1fr;
 
@@ -38,11 +38,11 @@
   &__left {
     padding: 2rem;
     padding-right: 0;
-    background-color: var(--bg-white-light);
+    background-color: var(--bg-light);
     box-shadow: $box-shadow;
   }
   &__right {
     padding: 2rem 4rem;
-    background-color: var(--bg-white-dark);
+    background-color: var(--bg-dark);
   }
 }
