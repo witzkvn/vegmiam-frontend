@@ -1,17 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router';
 import './App.scss';
 import CustomButton from './components/CustomButton/CustomButton';
 import Navigation from './components/Navigation/Navigation';
 import Searchbar from './components/Searchbar/Searchbar';
-import HomePage from './pages/HomePage/HomePage';
 import { setCurrentUserAction } from './redux/user/user-actions';
 import { selectCurrentUser } from './redux/user/user-selectors';
-import Routes from './Routes';
+import Routes from './routes/Routes';
+import { IoMenu } from "react-icons/io5";
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
 
 const App = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
+  const [navOpen, setNavOpen] = useState(false)
 
 
 
@@ -33,19 +36,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="App__left">
-        <Navigation />
-        {/* <button onClick={handleClick}>Test</button> */}
+      <div className={`App__left ${navOpen ? "active" : ""}`} onClick={() => setNavOpen(false)} >
+        <Navigation setNavOpen={setNavOpen} />
       </div>
       <div className="App__right">
-        <Searchbar />
+        <div className="App__right--top">
+          <div className="App__right--menu" onClick={() => setNavOpen(true)}>
+            <IoMenu />
+          </div>
+          <NavLink exact to="/">
+            <h1>Vegmiam</h1>
+          </NavLink>
+          <Searchbar />
+        </div>
 
         <Routes />
-        {/* <Switch>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch> */}
+
 
       </div>
     </div>

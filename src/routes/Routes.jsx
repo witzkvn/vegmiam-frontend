@@ -1,18 +1,18 @@
 import React, { lazy, Suspense } from "react";
-import ErrorBoundary from "./routes/ErrorBoundary";
-import LoadingPage from "./pages/LoadingPage/LoadingPage";
+import ErrorBoundary from "./ErrorBoundary";
+import LoadingPage from "../pages/LoadingPage/LoadingPage";
 import { useSelector } from "react-redux";
-import { selectCurrentUser } from "./redux/user/user-selectors";
+import { selectCurrentUser } from "../redux/user/user-selectors";
 import { Redirect, Route, Switch } from "react-router-dom";
-import ProtectedRoute from "./routes/ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 // console.log(HomePage);
 
 // import HomePage from "./pages/HomePage/HomePage";
 
-const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
-const RecipeDetailPage = lazy(() => import("./pages/RecipeDetailPage/RecipeDetailPage"));
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const RecipeDetailPage = lazy(() => import("../pages/RecipeDetailPage/RecipeDetailPage"));
+const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
 const Routes = () => {
   const currentUser = useSelector(selectCurrentUser);

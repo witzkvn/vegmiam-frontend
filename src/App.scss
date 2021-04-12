@@ -4,8 +4,7 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--bg-dark);
-  display: grid;
-  grid-template-columns: minmax(150px, 300px) 1fr;
+  display: flex;
 
   &-offline {
     display: flex;
@@ -36,16 +35,35 @@
   }
 
   &__left {
-    padding: $padding-container;
-    padding-right: 0;
     background-color: var(--bg-light);
     box-shadow: $shadow-box;
-    max-height: 100vh;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    z-index: 100;
+    width: 100%;
+    background-color: var(--black-overlay);
+    transition: $transition;
+
+    &.active {
+      left: 0%;
+    }
   }
   &__right {
-    padding: $padding-container $padding-container * 2;
+    padding: $padding-container;
     background-color: var(--bg-dark);
     max-height: 100vh;
     overflow: auto;
+    width: 100%;
+
+    &--top {
+      width: 100%;
+      display: flex;
+    }
+
+    &--menu {
+      @include menu-logo;
+    }
   }
 }

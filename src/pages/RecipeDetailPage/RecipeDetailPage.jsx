@@ -1,6 +1,9 @@
 import React from "react";
 
-const RecipeDetailPage = ({ recipe }) => {
+import { recettes } from "../../dummydatas";
+
+const RecipeDetailPage = () => {
+  const recipe = recettes[0];
   return <div className="RecipeDetailPage">Recpie detail page</div>;
 };
 
