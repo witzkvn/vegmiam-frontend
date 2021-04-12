@@ -11,12 +11,11 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 
+
 const App = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
   const [navOpen, setNavOpen] = useState(false)
-
-
 
   const handleLogin = () => {
     dispatch(setCurrentUserAction(true))
