@@ -10,6 +10,8 @@ const Searchbar = () => {
     setSearch(newSearch);
   };
 
+  // test
+
   return (
     <div className="Searchbar">
       <input type="text" placeholder="Recherche..." onChange={handleChange} value={search} />
