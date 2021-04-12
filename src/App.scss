@@ -35,7 +35,6 @@
   }
 
   &__left {
-    background-color: var(--bg-light);
     box-shadow: $shadow-box;
     height: 100vh;
     position: absolute;
@@ -43,11 +42,18 @@
     left: -100%;
     z-index: 100;
     width: 100%;
-    background-color: var(--black-overlay);
-    transition: $transition;
+
+    &:not(.active) {
+      background-color: red;
+      background-color: transparent;
+      transition: left 0.2s ease 0.05s, background-color 0.05s ease 0s;
+    }
 
     &.active {
       left: 0%;
+      background-color: var(--black-overlay);
+      transition: background-color 0s ease 0s;
+      transition: left 0.2s ease 0s, background-color 0.05s ease 0.2s;
     }
   }
   &__right {
