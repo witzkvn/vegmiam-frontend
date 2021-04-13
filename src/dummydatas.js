@@ -4,7 +4,8 @@ export const recettes = [
     title: "Lasagnes aux légumes",
     description: "Un superbe plat de lasagnes riche en légumes et facile à faire. Redécouvrez une recette classique revisitée aux légumes du soleil. Idéal pour faire le plein d'énergie !",
     difficulty: "Moyen",
-    rating: 4.2,
+    ratingsAverage: 4.2,
+    ratingsQuantity: 6,
     time: 50,
     coverImage: "https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/recipe_photos/original/548/lasagnes-de-legumes-0.jpg",
     images: [
@@ -16,8 +17,7 @@ export const recettes = [
     themes: [
       'italien', 'pates', 'tomate', 'four'
     ],
-    videoLink: "",
-    otherLinks: [''],
+    otherLink: "",
     author: "",
     createdAt: "",
     ingredients: [
