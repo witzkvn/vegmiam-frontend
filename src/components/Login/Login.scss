@@ -1,0 +1,14 @@
+@import "../../theme/all";
+
+.Login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  box-shadow: $shadow-box;
+  border-radius: $radius-lg;
+
+  .CustomButton {
+    margin-top: 1rem;
+  }
+}

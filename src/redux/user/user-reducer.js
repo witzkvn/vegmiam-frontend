@@ -4,7 +4,7 @@ import { UserActionTypes } from './user-types'
 
 const INITIAL_STATE = {
   // currentUser: currentUser ? currentUser.user : null,
-  currentUser: true,
+  currentUser: localStorage.getItem('user'),
   errors: null,
 };
 

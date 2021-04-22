@@ -15,3 +15,20 @@
   padding: 0.5rem;
   @include max-space;
 }
+
+// loading animation
+.loadingBox {
+  animation: 1.5s ease infinite loadingBox;
+}
+
+@keyframes loadingBox {
+  0% {
+    background-color: var(--bg-dark);
+  }
+  50% {
+    background-color: var(--grey-medium);
+  }
+  100% {
+    background-color: var(--bg-dark);
+  }
+}

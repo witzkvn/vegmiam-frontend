@@ -9,6 +9,7 @@ import Routes from './routes/Routes';
 import { IoMenu } from "react-icons/io5";
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Login from './components/Login/Login';
 
 
 
@@ -17,9 +18,9 @@ const App = () => {
   const currentUser = useSelector(selectCurrentUser)
   const [navOpen, setNavOpen] = useState(false)
 
-  const handleLogin = () => {
-    dispatch(setCurrentUserAction(true))
-  }
+  // const handleLogin = () => {
+  //   dispatch(setCurrentUserAction(true))
+  // }
 
   if (!currentUser) {
     return (
@@ -27,7 +28,8 @@ const App = () => {
         <div className="App-offline__wrapper">
           <h1>Bienvenue sur Vegmiam !</h1>
           <p>Vegmiam est actuellement un réseau privé et fermé aux nouvelles inscriptions.<br />Merci de vous connecter pour accéder au contenu.</p>
-          <CustomButton onClick={handleLogin} className="App-offline__wrapper--login" type="primary">Connexion</CustomButton>
+          <Login />
+          {/* <CustomButton onClick={handleLogin} className="App-offline__wrapper--login" type="primary">Connexion</CustomButton> */}
         </div>
       </div>
     )

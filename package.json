@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -22,6 +23,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:dev": "SET NODE_ENV=development&&react-scripts start",
+    "start:devonline": "SET NODE_ENV=devonline&&react-scripts start",
+    "start:prod": "SET NODE_ENV=production&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

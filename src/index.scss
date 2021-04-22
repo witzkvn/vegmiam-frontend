@@ -41,6 +41,16 @@ select {
   cursor: pointer;
 }
 
+label {
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+input,
+textarea {
+  margin-bottom: 1.2rem;
+}
+
 ul {
   list-style: none;
 }

@@ -2,11 +2,11 @@ import React from "react";
 
 import "./CustomButton.scss";
 
-const CustomButton = ({ type, className, children, ...otherProps }) => {
+const CustomButton = ({ level, className, children, ...otherProps }) => {
   return (
-    <div className={`CustomButton ${type && "CustomButton-" + type} ${className ? className : ""} `} {...otherProps}>
+    <button className={`CustomButton ${level && "CustomButton-" + level} ${className ? className : ""} `} {...otherProps}>
       {children}
-    </div>
+    </button>
   );
 };
 

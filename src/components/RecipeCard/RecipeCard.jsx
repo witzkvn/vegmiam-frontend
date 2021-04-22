@@ -5,8 +5,25 @@ import { timeConvert } from "../../helper/functions/timeConverter";
 import "./RecipeCard.scss";
 
 const RecipeCard = ({ recipe }) => {
+  if (!recipe) {
+    return (
+      <div className="RecipeCard loading">
+        <div className="RecipeCard__top loadingBox">
+          <div className="RecipeCard__image"></div>
+        </div>
+        <div className="RecipeCard__bottom">
+          <div className="RecipeCard__title loadingBox"></div>
+          <div className="RecipeCard__stats">
+            <div className="RecipeCard__stat loadingBox"></div>
+            <div className="RecipeCard__stat loadingBox"></div>
+            <div className="RecipeCard__stat loadingBox"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
-    <Link className="RecipeCard" to={`/recette/${recipe.id}`}>
+    <Link className="RecipeCard" to={`/recette/${recipe._id}`}>
       <div className="RecipeCard__top">
         <img src={recipe.images[0]} alt="aperçu de la recette" />
       </div>
@@ -19,7 +36,7 @@ const RecipeCard = ({ recipe }) => {
           <div className="RecipeCard__stat">
             <p>{recipe.difficulty}</p>
           </div>
-          <div className="RecipeCard__stat">{`${recipe.rating}/5`}</div>
+          <div className="RecipeCard__stat">{`${recipe.ratingsAverage}/5`}</div>
         </div>
       </div>
     </Link>

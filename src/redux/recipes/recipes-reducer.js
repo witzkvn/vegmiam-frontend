@@ -2,6 +2,7 @@ import { RecipesActionTypes } from './recipes-types';
 
 const INITIAL_STATE = {
   clickedRecipe: null,
+  recipesArray: null,
   errors: null,
 };
 
@@ -11,6 +12,12 @@ const recipesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         clickedRecipe: action.payload,
+        errors: null
+      };
+    case RecipesActionTypes.SET_RECIPES_ARRAY:
+      return {
+        ...state,
+        recipesArray: action.payload,
         errors: null
       };
     default:
