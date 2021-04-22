@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 const layoutReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LayoutActionTypes.SET_THEME:
-      console.log(action.payload)
       if (action.payload !== "light" && action.payload !== "dark") return state;
       return {
         ...state,

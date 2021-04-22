@@ -6,3 +6,11 @@ export const timeConvert = (timeInMinutes) => {
   return rhours + "h" + rminutes;
 }
 
+export const getReadableDate = date => {
+  if (!date) return
+  const options = {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  }
+  return new Date(date).toLocaleDateString('fr-FR', options)
+}
+

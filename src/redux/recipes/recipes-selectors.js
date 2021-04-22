@@ -10,3 +10,7 @@ export const selectRecipesArray = createSelector(
   [selectRecipes],
   recipes => recipes.recipesArray && recipes.recipesArray
 );
+export const selectClickedRecipe = createSelector(
+  [selectRecipes],
+  recipes => recipes.clickedRecipe && recipes.clickedRecipe
+);

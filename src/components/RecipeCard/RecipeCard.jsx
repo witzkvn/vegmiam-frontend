@@ -22,8 +22,9 @@ const RecipeCard = ({ recipe }) => {
       </div>
     );
   }
+
   return (
-    <Link className="RecipeCard" to={`/recette/${recipe._id}`}>
+    <Link className="RecipeCard" to={`/recette/${recipe._id}${recipe.slug ? `/${recipe.slug}` : ""}`}>
       <div className="RecipeCard__top">
         <img src={recipe.images[0]} alt="aperçu de la recette" />
       </div>

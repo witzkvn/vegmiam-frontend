@@ -6,3 +6,9 @@
   margin-right: 2rem;
   cursor: pointer;
 }
+
+@mixin card-style {
+  border-radius: $radius-lg;
+  background-color: var(--bg-medium);
+  box-shadow: $shadow-box;
+}
