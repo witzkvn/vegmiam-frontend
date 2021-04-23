@@ -72,15 +72,20 @@
     }
   }
   &__right {
-    padding: $padding-container;
     background-color: var(--bg-dark);
     max-height: 100vh;
     overflow: auto;
     width: 100%;
+    padding: 0 $padding-container;
 
     &--top {
+      padding: 1rem $padding-container;
       width: 100%;
       display: flex;
+      position: sticky;
+      top: 0;
+      left: 0;
+      background-color: var(--bg-dark);
 
       & h1 {
         margin-bottom: 0;

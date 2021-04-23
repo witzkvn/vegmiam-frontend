@@ -12,6 +12,7 @@ import defaultAvatar from "../../assets/default.jpg";
 
 const RecipeDetailPage = () => {
   const dispatch = useDispatch();
+  const [portions, setPortions] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const { id } = useParams();
@@ -35,19 +36,47 @@ const RecipeDetailPage = () => {
     fetchRecipe(id);
   }, [id, fetchRecipe]);
 
-  if (isLoading) {
-    return <p>Chargement ...</p>;
-  }
-
   if (error) {
     return <p>Une erreur est survenue...</p>;
   }
 
+  const handlePortionsChange = (e) => {
+    const newPortionsValue = parseInt(e.target.value);
+    setPortions(newPortionsValue);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="RecipeDetailPage loading">
+        <div className="RecipeDetailPage__title loadingBox pageWrapWidth"></div>
+
+        <div className="RecipeDetailPage__meta pageWrapWidth loadingBox"></div>
+
+        <div className="RecipeDetailPage__images">
+          <div className="RecipeDetailPage__image loadingBox"></div>
+          <div className="RecipeDetailPage__image loadingBox"></div>
+          <div className="RecipeDetailPage__image loadingBox"></div>
+        </div>
+
+        <div className="RecipeDetailPage__stats loadingBox pageWrapWidth"></div>
+
+        <div className="RecipeDetailPage__sectionLoading pageWrapWidth">
+          <div className="RecipeDetailPage__sectionLoading--title loadingBox"></div>
+          <div className="RecipeDetailPage__sectionLoading--content loadingBox"></div>
+        </div>
+        <div className="RecipeDetailPage__sectionLoading pageWrapWidth">
+          <div className="RecipeDetailPage__sectionLoading--title loadingBox"></div>
+          <div className="RecipeDetailPage__sectionLoading--content loadingBox"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="RecipeDetailPage">
-      <h2 className="RecipeDetailPage__title">{clickedRecipe?.title}</h2>
+      <h1 className="RecipeDetailPage__title pageWrapWidth">{clickedRecipe?.title}</h1>
 
-      <div className="RecipeDetailPage__meta">
+      <div className="RecipeDetailPage__meta pageWrapWidth">
         <p>
           Publié {clickedRecipe?.createdAt ? `le ${getReadableDate(clickedRecipe.createdAt)}, ` : ""}
           {clickedRecipe?.user?.name ? `par ${clickedRecipe.user.name}` : "par un(e) vrai(e) chef(fe) Vegmiam !"}
@@ -67,29 +96,77 @@ const RecipeDetailPage = () => {
         ))}
       </div>
 
-      <div className="RecipeDetailPage__stats">
+      <div className="RecipeDetailPage__stats pageWrapWidth">
         <div className="RecipeDetailPage__stat">
-          <p>Durée :</p>
+          <p>Durée</p>
           <p>{clickedRecipe?.time ? timeConvert(clickedRecipe.time) : "0h30"}</p>
         </div>
         <div className="RecipeDetailPage__stat">
-          <p>Difficulté: </p>
+          <p>Difficulté</p>
           <p>{clickedRecipe?.difficulty ? clickedRecipe.difficulty : "Moyen"}</p>
         </div>
         <div className="RecipeDetailPage__stat">
-          <p>Note moyenne: </p>
+          <p>Note</p>
           <p>
             {clickedRecipe?.ratingsAverage ? clickedRecipe.ratingsAverage : "3.5"}
             <span>{clickedRecipe?.ratingsQuantity && `(${clickedRecipe.ratingsQuantity} notes)`}</span>
           </p>
         </div>
         <div className="RecipeDetailPage__stat">
-          <p>Catégorie : </p>
+          <p>Catégorie</p>
           <p>{clickedRecipe?.category ? clickedRecipe.category : "Divers"}</p>
         </div>
       </div>
 
-      <div className="RecipeDetailPage__ingredients"></div>
+      {/* <div className="RecipeDetailPage__description pageWrapWidth">
+        <h3>Description</h3>
+        <p>{clickedRecipe?.description}</p>
+      </div> */}
+
+      <div className="RecipeDetailPage__ingredients pageWrapWidth">
+        <div className="RecipeDetailPage__ingredients--top">
+          <h2>Ingrédients</h2>
+          <div className="RecipeDetailPage__ingredients--ratio">
+            <input id="portions" type="number" min="1" max="100" value={portions} onChange={handlePortionsChange} />
+            <label htmlFor="portions">Portions</label>
+          </div>
+        </div>
+        <div className="RecipeDetailPage__ingredients--bottom">
+          {clickedRecipe?.ingredients.map((ingredient) => (
+            <>
+              <div className="RecipeDetailPage__ingredients--quantity">
+                {Math.ceil(ingredient?.quantity * portions)}
+                {ingredient.unite ? ` ${ingredient.unite}` : ""}
+              </div>
+              <div className="RecipeDetailPage__ingredients--name">{ingredient?.name}</div>
+            </>
+          ))}
+        </div>
+      </div>
+
+      <div className="RecipeDetailPage__etapes pageWrapWidth">
+        <h2>Etapes</h2>
+        <div className="RecipeDetailPage__etapes--grid">
+          {clickedRecipe?.steps.map((step, index) => (
+            <>
+              <p className="RecipeDetailPage__etapes--stepNumber">{index + 1}.</p>
+              <p className="RecipeDetailPage__etapes--step">{step?.description}</p>
+            </>
+          ))}
+        </div>
+      </div>
+
+      {clickedRecipe?.otherLink && (
+        <div className="RecipeDetailPage__otherLink pageWrapWidth">
+          <h2>Lien utile</h2>
+          <div className="RecipeDetailPage__otherLink--link">
+            <p>L'auteur de cette recette propose un lien utile : </p>
+            <a href={clickedRecipe.otherLink} target="_blank" rel="noreferrer">
+              Voir le lien
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
