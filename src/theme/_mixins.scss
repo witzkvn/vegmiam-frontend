@@ -1,3 +1,5 @@
+@import "./variables";
+
 @mixin menu-logo {
   display: flex;
   justify-content: center;
@@ -11,4 +13,16 @@
   border-radius: $radius-lg;
   background-color: var(--bg-medium);
   box-shadow: $shadow-box;
+}
+
+@mixin link {
+  font-weight: bold;
+  border-bottom: 3px solid transparent;
+  transition: $transition;
+  color: var(--secondary-medium);
+
+  &:hover {
+    color: var(--secondary-light);
+    border-bottom: 3px solid var(--secondary-medium);
+  }
 }

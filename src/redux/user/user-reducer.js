@@ -1,10 +1,10 @@
 import { UserActionTypes } from './user-types'
 
-// let currentUser = JSON.parse(localStorage.getItem('user'));
+let currentUser = JSON.parse(localStorage.getItem('user'));
 
 const INITIAL_STATE = {
   // currentUser: currentUser ? currentUser.user : null,
-  currentUser: localStorage.getItem('user'),
+  currentUser: currentUser || null,
   errors: null,
 };
 
