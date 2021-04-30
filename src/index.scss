@@ -23,6 +23,7 @@ select {
   padding: $padding-box;
   font-size: inherit;
   color: var(--text-black);
+  background-color: var(--bg-white-light);
   border-radius: $radius-md;
 }
 
@@ -33,7 +34,7 @@ textarea::placeholder {
 
 textarea {
   resize: none;
-  min-height: 10rem;
+  min-height: 5rem;
 }
 
 button,
@@ -47,7 +48,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   margin-bottom: 1.2rem;
 }
 

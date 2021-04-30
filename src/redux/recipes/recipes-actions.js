@@ -49,3 +49,36 @@ export const getAllRecipesAction = () => {
   }
 }
 
+
+export const createRecipeAction = (recipeObj) => {
+  return async (dispatch) => {
+    try {
+      const formData = new FormData()
+      Array.from(recipeObj.images).forEach(img => {
+        formData.append('images', img)
+      })
+      Object.keys(recipeObj).map((key, index) => {
+        if (key === "images") return false
+        return formData.append(key, recipeObj[key])
+      })
+
+
+      // for (var value of formData.values()) {
+      //   console.log(value);
+      // }
+      const res = await client().post('recipes/', formData)
+
+      if (res.status >= 300) {
+        throw new Error('Une erreur est survenue...')
+      }
+
+      if (res.data.data.data) {
+        // dispatch(setRecipesArray(res.data.data.data))
+        console.log(res.data.data.data)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+}
+

@@ -74,7 +74,8 @@
 
   &__images {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-auto-columns: minmax(30rem, 28%);
+    grid-auto-flow: column;
     grid-template-rows: 15rem;
     gap: 1rem;
     justify-content: center;

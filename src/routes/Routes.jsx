@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute";
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const RecipeDetailPage = lazy(() => import("../pages/RecipeDetailPage/RecipeDetailPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
+const AddRecipePage = lazy(() => import("../pages/AddRecipePage/AddRecipePage"));
 
 const Routes = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -26,6 +27,9 @@ const Routes = () => {
           </Route>
           <Route path="/recette/:id">
             <RecipeDetailPage />
+          </Route>
+          <Route path="/publier">
+            <AddRecipePage />
           </Route>
           <Route path="/not-found">
             <NotFoundPage />

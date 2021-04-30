@@ -39,3 +39,27 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.iconButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: $radius-round;
+  cursor: pointer;
+
+  &.noCursor {
+    cursor: unset;
+  }
+
+  & svg {
+    height: 100%;
+    width: 100%;
+    color: var(--secondary-medium);
+    transition: $transition;
+  }
+
+  &:hover {
+    & svg {
+      color: var(--secondary-light);
+    }
+  }
+}

@@ -1,4 +1,52 @@
 @import "../../theme/all";
 
+.RecipeCustomInput {
+  display: flex;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    flex: 1;
+  }
+
+  &__delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .AddRecipePage {
+  &.pageWrapWidth {
+    padding: $padding-container;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: $radius-md;
+    box-shadow: $shadow-box;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+
+    .CustomButton {
+      width: max-content;
+    }
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  label {
+    h2 {
+      margin-bottom: 0;
+      display: inline-block;
+    }
+  }
+
+  .CustomButton {
+    width: 100%;
+  }
 }

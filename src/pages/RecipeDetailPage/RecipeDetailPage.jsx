@@ -109,7 +109,7 @@ const RecipeDetailPage = () => {
           <p>Note</p>
           <p>
             {clickedRecipe?.ratingsAverage ? clickedRecipe.ratingsAverage : "3.5"}
-            <span>{clickedRecipe?.ratingsQuantity && `(${clickedRecipe.ratingsQuantity} notes)`}</span>
+            <span>{(clickedRecipe?.ratingsQuantity || clickedRecipe?.ratingsQuantity === 0) && `(${clickedRecipe.ratingsQuantity} notes)`}</span>
           </p>
         </div>
         <div className="RecipeDetailPage__stat">
