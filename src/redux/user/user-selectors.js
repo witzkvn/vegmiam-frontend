@@ -9,3 +9,7 @@ export const selectUserErrors = createSelector(
   [selectUser],
   user => user.errors && user.errors
 );
+export const selectUserfavorites = createSelector(
+  [selectUser],
+  user => user?.currentUser?.favorites || null
+);

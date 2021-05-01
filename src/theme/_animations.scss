@@ -1,0 +1,31 @@
+// loading animation
+.loadingBox {
+  animation: 1.5s ease infinite loadingBox;
+}
+
+@keyframes loadingBox {
+  0% {
+    background-color: var(--bg-dark);
+  }
+  50% {
+    background-color: var(--grey-medium);
+  }
+  100% {
+    background-color: var(--bg-dark);
+  }
+}
+
+// heart hover
+@keyframes heartBeat {
+  0%,
+  100%,
+  50% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+}

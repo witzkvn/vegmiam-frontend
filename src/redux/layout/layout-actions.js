@@ -5,4 +5,15 @@ export const setThemeAction = (theme) => ({
   payload: theme,
 });
 
+export const openPopupMessageAction = (status, message) => ({
+  type: LayoutActionTypes.OPEN_POPUP_MESSAGE,
+  payload: { status, message },
+});
+
+export const closePopupMessageAction = () => ({
+  type: LayoutActionTypes.CLOSE_POPUP_MESSAGE,
+});
+
+
+
 

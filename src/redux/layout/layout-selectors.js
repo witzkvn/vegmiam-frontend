@@ -9,3 +9,7 @@ export const selectLayoutErrors = createSelector(
   [selectLayout],
   layout => layout.errors && layout.errors
 );
+export const selectPopup = createSelector(
+  [selectLayout],
+  layout => layout?.popup
+);

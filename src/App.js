@@ -10,6 +10,7 @@ import { IoMenu } from "react-icons/io5";
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Login from './components/Login/Login';
+import NotificationPoper from './components/NotificationPoper/NotificationPoper';
 
 
 
@@ -37,6 +38,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <NotificationPoper />
       <div className={`App__left ${navOpen ? "active" : ""}`} onClick={() => setNavOpen(false)} >
         <Navigation setNavOpen={setNavOpen} />
       </div>

@@ -14,6 +14,7 @@ const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const RecipeDetailPage = lazy(() => import("../pages/RecipeDetailPage/RecipeDetailPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 const AddRecipePage = lazy(() => import("../pages/AddRecipePage/AddRecipePage"));
+const FavoritesPage = lazy(() => import("../pages/FavoritesPages/FavoritesPage"));
 
 const Routes = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -30,6 +31,9 @@ const Routes = () => {
           </Route>
           <Route path="/publier">
             <AddRecipePage />
+          </Route>
+          <Route path="/favoris">
+            <FavoritesPage />
           </Route>
           <Route path="/not-found">
             <NotFoundPage />

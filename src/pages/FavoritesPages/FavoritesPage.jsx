@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RecipesGrid from "../../components/RecipesGrid/RecipesGrid";
 import { selectRecipesArray } from "../../redux/recipes/recipes-selectors";
-import { getAllRecipesAction } from "../../redux/recipes/recipes-actions";
+import { getFavoritesRecipesAction } from "../../redux/recipes/recipes-actions";
 
-const HomePage = () => {
+const FavoritesPage = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -13,7 +13,7 @@ const HomePage = () => {
   const fetchRecipes = useCallback(async () => {
     setError(null);
     try {
-      await dispatch(getAllRecipesAction());
+      await dispatch(getFavoritesRecipesAction());
     } catch (error) {
       setError(error.message);
     }
@@ -36,4 +36,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default FavoritesPage;
