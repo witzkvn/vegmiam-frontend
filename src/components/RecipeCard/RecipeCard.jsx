@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { timeConvert } from "../../helper/functions/timeConverter";
 import AddFavButton from "../AddFavButton/AddFavButton";
+import { IoTimeOutline, IoStar } from "react-icons/io5";
 
 import "./RecipeCard.scss";
 
@@ -24,6 +25,17 @@ const RecipeCard = ({ recipe }) => {
     );
   }
 
+  const getDifficultyNumberArray = (difficulty) => {
+    switch (difficulty) {
+      case "facile":
+        return [1];
+      case "difficile":
+        return [1, 1, 1];
+      default:
+        return [1, 1];
+    }
+  };
+
   return (
     <div className="RecipeCard">
       <AddFavButton
@@ -41,10 +53,13 @@ const RecipeCard = ({ recipe }) => {
           <h3>{recipe.title}</h3>
           <div className="RecipeCard__stats">
             <div className="RecipeCard__stat">
+              <IoTimeOutline />
               <p>{timeConvert(recipe.time)}</p>
             </div>
             <div className="RecipeCard__stat">
-              <p>{recipe.difficulty}</p>
+              {getDifficultyNumberArray().map((item) => (
+                <IoStar />
+              ))}
             </div>
             <div className="RecipeCard__stat">{`${recipe.ratingsAverage}/5`}</div>
           </div>

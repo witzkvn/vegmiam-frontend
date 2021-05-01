@@ -19,6 +19,9 @@ const RecipesGrid = ({ recipes, isLoading }) => {
       </div>
     );
   }
+  if (!recipes) {
+    return <p>Aucun favoris pour le moment.</p>;
+  }
   return (
     <div className="RecipesGrid">
       {recipes?.map((recette) => (

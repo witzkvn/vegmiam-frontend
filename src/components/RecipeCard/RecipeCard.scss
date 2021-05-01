@@ -52,7 +52,7 @@
   }
 
   &__bottom {
-    padding: $padding-box;
+    padding: $padding-sm;
     text-align: center;
     flex: 1;
     display: flex;
@@ -62,11 +62,25 @@
   &__stats {
     font-size: 0.8rem;
     margin-top: auto;
-    display: flex;
-    justify-content: space-around;
+    // display: flex;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
   }
 
   &__stat {
-    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+
+    &:first-of-type {
+      svg {
+        margin-right: 0.2rem;
+      }
+    }
+
+    &:nth-of-type(2) {
+      color: var(--primary-medium);
+    }
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
-import { setCurrentUserAction } from "../../redux/user/user-actions";
+import { setClickedUserAction, setCurrentUserAction } from "../../redux/user/user-actions";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 import "./Navigation.scss";
@@ -39,7 +39,14 @@ const Navigation = ({ setNavOpen }) => {
         <NavLink className="Navigation__links--link" to="/favoris" onClick={handleNavClose}>
           Favoris
         </NavLink>
-        <NavLink className="Navigation__links--link" to="/compte" onClick={handleNavClose}>
+        <NavLink
+          className="Navigation__links--link"
+          to="/compte"
+          onClick={() => {
+            dispatch(setClickedUserAction());
+            handleNavClose();
+          }}
+        >
           Compte
         </NavLink>
         <NavLink className="Navigation__links--link" to="/parametres" onClick={handleNavClose}>

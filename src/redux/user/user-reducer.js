@@ -5,6 +5,7 @@ let currentUser = JSON.parse(localStorage.getItem('user'));
 const INITIAL_STATE = {
   // currentUser: currentUser ? currentUser.user : null,
   currentUser: currentUser || null,
+  clickedUser: null,
   errors: null,
 };
 
@@ -14,6 +15,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        errors: null
+      };
+    case UserActionTypes.SET_CLICKED_USER:
+      return {
+        ...state,
+        clickedUser: action.payload || null,
         errors: null
       };
     default:

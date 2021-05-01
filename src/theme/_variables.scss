@@ -1,5 +1,6 @@
 // paddings
 $padding-box: 0.5rem 1.5rem;
+$padding-sm: 1rem;
 $padding-box-lg: 1rem 2rem;
 $padding-container: 2rem;
 
@@ -14,3 +15,6 @@ $shadow-box: 0 0 20px rgba(0, 0, 0, 0.1), 0 0 6px rgba(0, 0, 0, 0.05);
 // transition
 $transition: all 0.2s ease;
 $transition-slow: all 1s default;
+
+// breakpoints
+$bp-lg: 1300px;

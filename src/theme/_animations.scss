@@ -4,14 +4,12 @@
 }
 
 @keyframes loadingBox {
-  0% {
-    background-color: var(--bg-dark);
+  0%,
+  100% {
+    background-color: var(--bg-medium);
   }
   50% {
-    background-color: var(--grey-medium);
-  }
-  100% {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-light);
   }
 }
 

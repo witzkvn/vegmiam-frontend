@@ -10,6 +10,8 @@ import ImageFullscreenSlider from "../../components/ImageFullscreenSlider/ImageF
 
 import "./RecipeDetailPage.scss";
 import defaultAvatar from "../../assets/default.jpg";
+import AddFavButton from "../../components/AddFavButton/AddFavButton";
+import UserAvatar from "../../components/UserAvatar/UserAvatar";
 
 const RecipeDetailPage = () => {
   const dispatch = useDispatch();
@@ -89,20 +91,27 @@ const RecipeDetailPage = () => {
     <>
       {imageFullscreen && <ImageFullscreenSlider imgUrl={selectedImage} handleCloseImageSlider={handleCloseImageSlider} />}
       <div className="RecipeDetailPage">
-        <h1 className="RecipeDetailPage__title pageWrapWidth">{clickedRecipe?.title}</h1>
+        <div className="RecipeDetailPage__header">
+          <div className="RecipeDetailPage__header--block"></div>
+          <h1 className="RecipeDetailPage__header--title">{clickedRecipe?.title}</h1>
+          <div className="RecipeDetailPage__header--block">
+            <AddFavButton recipeId={clickedRecipe?._id} />
+          </div>
+        </div>
 
         <div className="RecipeDetailPage__meta pageWrapWidth">
           <p>
             Publié {clickedRecipe?.createdAt ? `le ${getReadableDate(clickedRecipe.createdAt)}, ` : ""}
             {clickedRecipe?.user?.name ? `par ${clickedRecipe.user.name}` : "par un(e) vrai(e) chef(fe) Vegmiam !"}
           </p>
-          <div className="userAvatar">
+          <UserAvatar userId={clickedRecipe?.user?._id} imgSrc={clickedRecipe?.user?.avatar} />
+          {/* <div className="userAvatar">
             {clickedRecipe?.user?.avatar && clickedRecipe?.user?.avatar !== "default.jpg" ? (
               <img src={clickedRecipe?.user?.avatar} alt="user avatar" />
             ) : (
               <img src={defaultAvatar} alt="user avatar" />
-            )}
-          </div>
+            )} */}
+          {/* </div> */}
         </div>
 
         <div className="RecipeDetailPage__images">

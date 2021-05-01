@@ -50,6 +50,25 @@ export const getAllRecipesAction = () => {
     }
   }
 }
+
+export const getAllRecipesFromUserByIdAction = (userId) => {
+  return async (dispatch) => {
+    try {
+      const res = await client().get(`recipes/user/${userId}/?fields=title,slug,images,time,difficulty,ratingsAverage`)
+
+      if (res.status >= 300) {
+        throw new Error('Une erreur est survenue...')
+      }
+
+      if (res.data.data.data) {
+        dispatch(setRecipesArray(res.data.data.data))
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
 export const getFavoritesRecipesAction = () => {
   return async (dispatch) => {
     try {

@@ -22,9 +22,14 @@ select {
   font-family: inherit;
   padding: $padding-box;
   font-size: inherit;
-  color: var(--text-black);
-  background-color: var(--bg-white-light);
   border-radius: $radius-md;
+}
+
+input,
+textarea,
+select {
+  background-color: var(--bg-light);
+  color: inherit;
 }
 
 input::placeholder,
