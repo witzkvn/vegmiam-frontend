@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { timeConvert } from "../../helper/functions/timeConverter";
 import AddFavButton from "../AddFavButton/AddFavButton";
-import { IoTimeOutline, IoStar } from "react-icons/io5";
+import { IoTimeOutline, IoStar, IoStarOutline, IoStarHalf, IoRibbon } from "react-icons/io5";
 
 import "./RecipeCard.scss";
 
@@ -28,11 +28,11 @@ const RecipeCard = ({ recipe }) => {
   const getDifficultyNumberArray = (difficulty) => {
     switch (difficulty) {
       case "facile":
-        return [1];
+        return [1, 0, 0];
       case "difficile":
         return [1, 1, 1];
       default:
-        return [1, 1];
+        return [1, 2, 0];
     }
   };
 
@@ -53,15 +53,16 @@ const RecipeCard = ({ recipe }) => {
           <h3>{recipe.title}</h3>
           <div className="RecipeCard__stats">
             <div className="RecipeCard__stat">
-              <IoTimeOutline />
               <p>{timeConvert(recipe.time)}</p>
+              <IoTimeOutline />
             </div>
             <div className="RecipeCard__stat">
-              {getDifficultyNumberArray().map((item) => (
-                <IoStar />
-              ))}
+              {getDifficultyNumberArray().map((item) => (item === 0 ? <IoStarOutline /> : item === 2 ? <IoStarHalf /> : <IoStar />))}
             </div>
-            <div className="RecipeCard__stat">{`${recipe.ratingsAverage}/5`}</div>
+            <div className="RecipeCard__stat">
+              {`${recipe.ratingsAverage}/5`}
+              <IoRibbon />
+            </div>
           </div>
         </div>
       </Link>

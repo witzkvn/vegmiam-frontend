@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { IoCloseCircle } from "react-icons/io5";
 import { useDispatch } from "react-redux";
+import { withRouter } from "react-router";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { createRecipeAction } from "../../redux/recipes/recipes-actions";
 
@@ -87,7 +88,7 @@ export const StepInput = ({ index, handleDeleteCustomInput, handleCustomInputCha
   );
 };
 
-const AddRecipePage = () => {
+const AddRecipePage = ({ history }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -176,15 +177,19 @@ const AddRecipePage = () => {
 
   const handleSubmit = useCallback(async () => {
     setError(null);
+    setIsLoading(true);
     try {
       const recipeCopy = { ...recipe };
       recipeCopy.ingredients = JSON.stringify(recipeCopy.ingredients);
       recipeCopy.steps = JSON.stringify(recipeCopy.steps);
       await dispatch(createRecipeAction(recipeCopy));
+      history.navigate("/");
     } catch (error) {
-      setError(error.message);
+      console.log(error.response);
+      setError(error?.response?.data?.message || "Merci de vérifier les champs renseignés.");
     }
-  }, [dispatch, recipe]);
+    setIsLoading(false);
+  }, [dispatch, history, recipe]);
 
   useEffect(() => {
     const valuesArray = recipe.themesString.split(",").map((item) => item.trim());
@@ -192,9 +197,11 @@ const AddRecipePage = () => {
     handleInputChange("themes", purValuesArray);
   }, [recipe.themesString]);
 
-  // useEffect(() => {
-  //   console.log(recipe.images);
-  // }, [recipe.images]);
+  useEffect(() => {
+    if (error) {
+      window.scrollTo(0, 0);
+    }
+  }, [error]);
 
   return (
     <form className="AddRecipePage pageWrapWidth" onSubmit={(e) => e.preventDefault()}>
@@ -264,7 +271,7 @@ const AddRecipePage = () => {
       {/* ingredients */}
       <div className="form-group">
         <label>
-          <h2>Liste des ingrédients </h2> (précisez les quantités pour 1 portion)
+          <h2>Liste des ingrédients* </h2> (précisez les quantités pour 1 portion)
         </label>
         {recipe.ingredients.map((ingredient, index) => (
           <IngredientInput
@@ -286,7 +293,7 @@ const AddRecipePage = () => {
       {/* etapes */}
       <div className="form-group">
         <label>
-          <h2>Liste des étapes</h2>
+          <h2>Liste des étapes*</h2>
         </label>
         {recipe.steps.map((step, index) => (
           <StepInput
@@ -332,14 +339,21 @@ const AddRecipePage = () => {
         <input type="text" id="link" onChange={(e) => handleInputChange("otherLink", e.target.value)} value={recipe.otherLink} />
       </div>
 
+      {error && (
+        <div className="AddRecipePage__error">
+          <p className="error-text">Une erreur est survenue :</p>
+          <p className="error-text">{error}</p>
+        </div>
+      )}
+
       <CustomButton type="submit" onClick={handleSubmit} level="primary">
-        Publier la recette
+        {isLoading ? "Chargement ..." : "Publier la recette"}
       </CustomButton>
     </form>
   );
 };
 
-export default AddRecipePage;
+export default withRouter(AddRecipePage);
 
 // MODEL
 

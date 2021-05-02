@@ -46,3 +46,33 @@
     }
   }
 }
+
+.error-text {
+  color: var(--error);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  width: 100%;
+
+  .CustomButton {
+    width: max-content;
+  }
+
+  &__inline-input {
+    display: flex;
+
+    input {
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    .CustomButton {
+      width: max-content;
+      height: auto;
+      margin-left: 1rem;
+    }
+  }
+}

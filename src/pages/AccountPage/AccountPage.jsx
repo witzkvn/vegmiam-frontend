@@ -88,7 +88,7 @@ const AccountPage = ({ location }) => {
         <>
           <UserAvatar imgSrc={user?.avatar} />
           <div className="AccountPage__header--right">
-            <p>Chef {user?.name}</p>
+            <h2>Chef {user?.name}</h2>
             <p>{recipesArray?.length} recettes publiées</p>
           </div>
         </>

@@ -48,3 +48,36 @@ export const getUserByIdAction = (userId) => {
   }
 }
 
+
+export const updateUserAtion = (newSettingsObj) => {
+  return async dispatch => {
+
+    try {
+      let updatedField;
+      if (newSettingsObj.avatar) {
+        updatedField = new FormData()
+        updatedField.append('avatar', newSettingsObj.avatar)
+      } else {
+        updatedField = JSON.stringify(newSettingsObj)
+      }
+
+      console.log(updatedField)
+      const res = await client().patch(`users/updateMe`, updatedField)
+
+      if (res.status >= 300) {
+        throw new Error('Une erreur est survenue...')
+      }
+
+
+      if (res.data.data.user) {
+        dispatch(setCurrentUserAction(res.data.data.user))
+        localStorage.setItem('user', JSON.stringify(res.data.data.user))
+        return res.data.data.user
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+

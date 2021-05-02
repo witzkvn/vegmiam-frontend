@@ -25,13 +25,13 @@
     border-radius: $radius-md;
     box-shadow: $shadow-box;
   }
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
 
-    .CustomButton {
-      width: max-content;
+  &__error {
+    margin-bottom: 1rem;
+
+    p:first-of-type {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
     }
   }
 
@@ -46,7 +46,7 @@
     }
   }
 
-  .CustomButton {
+  .CustomButton[type="submit"] {
     width: 100%;
   }
 }
