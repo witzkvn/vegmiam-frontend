@@ -1,10 +1,22 @@
 @import "../../theme/all";
 
 .RecipeCard {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  @include card-style;
+  position: relative;
+
+  .AddFavButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 2;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 100%;
+    @include card-style;
+  }
 
   &.loading {
     .RecipeCard__title {
@@ -33,16 +45,14 @@
     border-radius: $radius-lg $radius-lg 0 0;
 
     img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      height: 100%;
       width: 100%;
+      object-fit: cover;
     }
   }
 
   &__bottom {
-    padding: $padding-box;
+    padding: $padding-sm;
     text-align: center;
     flex: 1;
     display: flex;
@@ -51,12 +61,26 @@
 
   &__stats {
     font-size: 0.8rem;
-    margin-top: 2rem;
-    display: flex;
-    justify-content: space-around;
+    margin-top: auto;
+    // display: flex;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
   }
 
   &__stat {
-    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+
+    &:nth-child(odd) {
+      svg {
+        margin-left: 0.2rem;
+      }
+    }
+
+    &:nth-of-type(2) {
+      color: var(--primary-medium);
+    }
   }
 }

@@ -1,0 +1,34 @@
+@import "../../theme/all";
+
+.AccountPage {
+  padding: $padding-container;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--right {
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    &--loading {
+      &:first-of-type {
+        height: 2rem;
+        width: 15rem;
+        margin-bottom: 0.8rem;
+      }
+      height: 1rem;
+      width: 7rem;
+    }
+
+    .UserAvatar {
+      width: 4rem;
+      height: 4rem;
+      margin-right: 2rem;
+    }
+  }
+}

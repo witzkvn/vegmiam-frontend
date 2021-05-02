@@ -13,10 +13,12 @@ import ProtectedRoute from "./ProtectedRoute";
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const RecipeDetailPage = lazy(() => import("../pages/RecipeDetailPage/RecipeDetailPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
+const AddRecipePage = lazy(() => import("../pages/AddRecipePage/AddRecipePage"));
+const FavoritesPage = lazy(() => import("../pages/FavoritesPages/FavoritesPage"));
+const AccountPage = lazy(() => import("../pages/AccountPage/AccountPage"));
+const SettingsPage = lazy(() => import("../pages/SettingsPage/SettingsPage"));
 
 const Routes = () => {
-  const currentUser = useSelector(selectCurrentUser);
-
   return (
     <ErrorBoundary>
       <Suspense fallback={<LoadingPage />}>
@@ -26,6 +28,24 @@ const Routes = () => {
           </Route>
           <Route path="/recette/:id">
             <RecipeDetailPage />
+          </Route>
+          <Route path="/publier">
+            <AddRecipePage />
+          </Route>
+          <Route path="/modifier">
+            <AddRecipePage />
+          </Route>
+          <Route path="/favoris">
+            <FavoritesPage />
+          </Route>
+          <Route path="/compte">
+            <AccountPage />
+          </Route>
+          <Route path="/chef/:userid">
+            <AccountPage />
+          </Route>
+          <Route path="/parametres">
+            <SettingsPage />
           </Route>
           <Route path="/not-found">
             <NotFoundPage />

@@ -1,0 +1,19 @@
+@import "../../theme/all";
+
+.AddFavButton {
+  border-radius: $radius-round;
+  background-color: var(--bg-white-medium);
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: $shadow-box;
+  font-size: 1.3rem;
+  color: var(--red-liked);
+  cursor: pointer;
+
+  &:hover svg {
+    animation: 1s ease infinite heartBeat;
+  }
+}

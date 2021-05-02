@@ -1,0 +1,27 @@
+@import "../../theme/all";
+
+.SettingsPage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: $padding-container;
+
+  label h2 {
+    margin-bottom: 0;
+    display: inline-block;
+  }
+
+  &__user {
+    display: flex;
+    margin: 2rem;
+
+    h2 {
+      font-size: 2rem;
+    }
+    .UserAvatar {
+      width: 4rem;
+      height: 4rem;
+      margin-right: 2rem;
+    }
+  }
+}

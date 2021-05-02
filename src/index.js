@@ -11,16 +11,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // axios settings
-const headersKeys = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
-  'Authorization': authHeader()
+const getHeadersKeys = () => {
+  return {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': authHeader()
+  }
 }
 
 export const client = () => {
   return axios.create({
     baseURL: 'http://localhost:3000/api/v1/',
-    headers: headersKeys
+    headers: getHeadersKeys()
   })
 }
 

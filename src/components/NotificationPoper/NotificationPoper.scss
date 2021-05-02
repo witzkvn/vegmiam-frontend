@@ -1,0 +1,34 @@
+@import "../../theme/all";
+
+.NotificationPoper {
+  position: absolute;
+  // top: -1000px;
+  top: 1rem;
+  left: 50%;
+  transform: translate(-50%, -5rem);
+  width: 40%;
+  z-index: 10;
+  box-shadow: $shadow-box;
+  padding: $padding-box-lg;
+  border-radius: $radius-md;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--text-white);
+  transition: $transition;
+
+  &__error {
+    background-color: var(--error);
+  }
+  &__success {
+    background-color: var(--success);
+  }
+  &__info {
+    background-color: var(--info);
+    color: var(--text-black);
+  }
+
+  &.active {
+    transform: translate(-50%, 1rem);
+  }
+}

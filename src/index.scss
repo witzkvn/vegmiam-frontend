@@ -22,8 +22,14 @@ select {
   font-family: inherit;
   padding: $padding-box;
   font-size: inherit;
-  color: var(--text-black);
   border-radius: $radius-md;
+}
+
+input,
+textarea,
+select {
+  background-color: var(--bg-light);
+  color: inherit;
 }
 
 input::placeholder,
@@ -33,7 +39,7 @@ textarea::placeholder {
 
 textarea {
   resize: none;
-  min-height: 10rem;
+  min-height: 5rem;
 }
 
 button,
@@ -47,7 +53,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   margin-bottom: 1.2rem;
 }
 
