@@ -5,18 +5,13 @@ import CustomButton from "../CustomButton/CustomButton";
 
 import "./AlertOverlayPopup.scss";
 
-const AlertOverlayPopup = ({ message, actionOnClick, actionText }) => {
+const AlertOverlayPopup = ({ bgOnClick, children }) => {
   const overlayOpen = useSelector(selectOverlayMessageOpen);
 
   if (!overlayOpen) return null;
   return (
-    <div className="AlertOverlayPopup">
-      <div className="AlertOverlayPopup__wrapper">
-        {message}
-        <CustomButton level="primary" onClick={actionOnClick}>
-          {actionText || "OK"}
-        </CustomButton>
-      </div>
+    <div className="AlertOverlayPopup" onClick={bgOnClick}>
+      <div className="AlertOverlayPopup__wrapper">{children}</div>
     </div>
   );
 };

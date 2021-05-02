@@ -18,9 +18,14 @@
     border-radius: $radius-lg;
     align-items: center;
     justify-content: center;
+  }
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
 
-    .CustomButton {
-      margin-top: 2rem;
+    & .CustomButton:not(:last-of-type) {
+      margin-right: 1rem;
     }
   }
 }

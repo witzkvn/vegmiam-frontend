@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { timeConvert } from "../../helper/functions/timeConverter";
 import AddFavButton from "../AddFavButton/AddFavButton";
 import { IoTimeOutline, IoStar, IoStarOutline, IoStarHalf, IoRibbon } from "react-icons/io5";
+import defaultRecipeImage from "../../assets/default_recipe.jpg";
 
 import "./RecipeCard.scss";
 
@@ -47,7 +48,7 @@ const RecipeCard = ({ recipe }) => {
 
       <Link className="RecipeCard__wrapper" to={`/recette/${recipe._id}${recipe.slug ? `/${recipe.slug}` : ""}`}>
         <div className="RecipeCard__top">
-          <img src={recipe.images[0]} alt="aperçu de la recette" />
+          <img src={recipe.images[0] || defaultRecipeImage} alt="aperçu de la recette" />
         </div>
         <div className="RecipeCard__bottom">
           <h3>{recipe.title}</h3>
@@ -57,7 +58,15 @@ const RecipeCard = ({ recipe }) => {
               <IoTimeOutline />
             </div>
             <div className="RecipeCard__stat">
-              {getDifficultyNumberArray().map((item) => (item === 0 ? <IoStarOutline /> : item === 2 ? <IoStarHalf /> : <IoStar />))}
+              {getDifficultyNumberArray(recipe?.difficulty).map((item, index) =>
+                item === 0 ? (
+                  <IoStarOutline key={`${recipe?._id}-${index}`} />
+                ) : item === 2 ? (
+                  <IoStarHalf key={`${recipe?._id}-${index}`} />
+                ) : (
+                  <IoStar key={`${recipe?._id}-${index}`} />
+                )
+              )}
             </div>
             <div className="RecipeCard__stat">
               {`${recipe.ratingsAverage}/5`}

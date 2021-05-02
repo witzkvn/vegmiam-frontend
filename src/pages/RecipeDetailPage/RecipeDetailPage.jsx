@@ -1,25 +1,33 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useParams, withRouter } from "react-router";
 
 import { recettes } from "../../dummydatas";
 import { getReadableDate, timeConvert } from "../../helper/functions/timeConverter";
-import { getRecipeByIdAction } from "../../redux/recipes/recipes-actions";
+import { deleteRecipeByIdAction, getRecipeByIdAction } from "../../redux/recipes/recipes-actions";
 import { selectClickedRecipe } from "../../redux/recipes/recipes-selectors";
 import ImageFullscreenSlider from "../../components/ImageFullscreenSlider/ImageFullscreenSlider";
 
 import "./RecipeDetailPage.scss";
-import defaultAvatar from "../../assets/default.jpg";
+import { selectCurrentUser } from "../../redux/user/user-selectors.js";
 import AddFavButton from "../../components/AddFavButton/AddFavButton";
 import UserAvatar from "../../components/UserAvatar/UserAvatar";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import { Link } from "react-router-dom";
+import AlertOverlayPopup from "../../components/AlertOverlayPopup/AlertOverlayPopup";
+import { closeOverlayMessageAction, openOverlayMessageAction } from "../../redux/layout/layout-actions";
 
-const RecipeDetailPage = () => {
+import { IoArrowBack } from "react-icons/io5";
+
+const RecipeDetailPage = ({ history }) => {
   const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
   const [portions, setPortions] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageFullscreen, setImageFullscreen] = useState(false);
   const [error, setError] = useState();
+  const [deleteError, setDeleteError] = useState();
   const { id } = useParams();
   const clickedRecipe = useSelector(selectClickedRecipe);
 
@@ -87,13 +95,48 @@ const RecipeDetailPage = () => {
     setSelectedImage(null);
   };
 
+  const handleDeleteRecipe = async () => {
+    setDeleteError(null);
+    try {
+      await dispatch(deleteRecipeByIdAction(clickedRecipe?._id));
+      history.push("/");
+    } catch (error) {
+      setDeleteError(error?.response?.data?.message || "Une erreur est survenue lors de la suppression de la recette. Merci de réessayer.");
+    }
+    dispatch(closeOverlayMessageAction());
+  };
+
   return (
     <>
+      <AlertOverlayPopup bgOnClick={() => dispatch(closeOverlayMessageAction())}>
+        <p>Etes-vous sûr de vouloir supprimer cette recette ? Elle sera définitivement perdue.</p>
+        <div className="AlertOverlayPopup__buttons">
+          <CustomButton onClick={() => dispatch(closeOverlayMessageAction())} level="secondary">
+            Annuler
+          </CustomButton>
+          <CustomButton onClick={handleDeleteRecipe} level="primary">
+            Supprimer
+          </CustomButton>
+        </div>
+      </AlertOverlayPopup>
+
       {imageFullscreen && <ImageFullscreenSlider imgUrl={selectedImage} handleCloseImageSlider={handleCloseImageSlider} />}
+
       <div className="RecipeDetailPage">
+        {deleteError && <p>Une erreur est survenue lors de la suppression... Merci de réessayer.</p>}
         <div className="RecipeDetailPage__header">
-          <div className="RecipeDetailPage__header--block"></div>
-          <h1 className="RecipeDetailPage__header--title">{clickedRecipe?.title}</h1>
+          <div className="RecipeDetailPage__header--block">
+            <IoArrowBack onClick={() => history.goBack()} />
+          </div>
+          <div className="RecipeDetailPage__header--central">
+            <h1 className="RecipeDetailPage__header--title">{clickedRecipe?.title}</h1>
+            {clickedRecipe?.user?._id === currentUser?._id && (
+              <div className="RecipeDetailPage__header--actions">
+                <Link to="/modifier">Modifier</Link>
+                <p onClick={() => dispatch(openOverlayMessageAction())}>Supprimer</p>
+              </div>
+            )}
+          </div>
           <div className="RecipeDetailPage__header--block">
             <AddFavButton recipeId={clickedRecipe?._id} />
           </div>
@@ -105,20 +148,21 @@ const RecipeDetailPage = () => {
             {clickedRecipe?.user?.name ? `par ${clickedRecipe.user.name}` : "par un(e) vrai(e) chef(fe) Vegmiam !"}
           </p>
           <UserAvatar userId={clickedRecipe?.user?._id} imgSrc={clickedRecipe?.user?.avatar} />
-          {/* <div className="userAvatar">
-            {clickedRecipe?.user?.avatar && clickedRecipe?.user?.avatar !== "default.jpg" ? (
-              <img src={clickedRecipe?.user?.avatar} alt="user avatar" />
-            ) : (
-              <img src={defaultAvatar} alt="user avatar" />
-            )} */}
-          {/* </div> */}
         </div>
 
-        <div className="RecipeDetailPage__images">
-          {clickedRecipe?.images.map((img) => (
-            <img src={img} alt={`recette ${clickedRecipe?.title}`} className="RecipeDetailPage__image" onClick={() => handleOpenImageSlider(img)} />
-          ))}
-        </div>
+        {clickedRecipe?.images?.length > 0 && (
+          <div className="RecipeDetailPage__images">
+            {clickedRecipe?.images.map((img, index) => (
+              <img
+                key={`${clickedRecipe?.id}-image-${index}`}
+                src={img}
+                alt={`recette ${clickedRecipe?.title}`}
+                className="RecipeDetailPage__image"
+                onClick={() => handleOpenImageSlider(img)}
+              />
+            ))}
+          </div>
+        )}
 
         {clickedRecipe?.description && (
           <div className="RecipeDetailPage__description pageWrapWidth">
@@ -155,8 +199,8 @@ const RecipeDetailPage = () => {
             </div>
           </div>
           <ul className="RecipeDetailPage__ingredients--bottom">
-            {clickedRecipe?.ingredients.map((ingredient) => (
-              <li className="RecipeDetailPage__ingredient">
+            {clickedRecipe?.ingredients.map((ingredient, index) => (
+              <li key={`${clickedRecipe?.id}-ingredient-${index}`} className="RecipeDetailPage__ingredient">
                 <span className="RecipeDetailPage__ingredient--quantity">
                   {Math.ceil(ingredient?.quantity * portions)}
                   {ingredient.unite ? ` ${ingredient.unite}` : ""}
@@ -169,12 +213,12 @@ const RecipeDetailPage = () => {
 
         <div className="RecipeDetailPage__etapes pageWrapWidth">
           <h2>Etapes</h2>
-          <div className="RecipeDetailPage__etapes--grid">
+          <div className="RecipeDetailPage__etapes--wrapper">
             {clickedRecipe?.steps.map((step, index) => (
-              <>
+              <div className="RecipeDetailPage__etapes--item" key={`${clickedRecipe?.id}-image-${index}`}>
                 <p className="RecipeDetailPage__etapes--stepNumber">{index + 1}.</p>
                 <p className="RecipeDetailPage__etapes--step">{step?.description}</p>
-              </>
+              </div>
             ))}
           </div>
         </div>
@@ -195,4 +239,4 @@ const RecipeDetailPage = () => {
   );
 };
 
-export default RecipeDetailPage;
+export default withRouter(RecipeDetailPage);

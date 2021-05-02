@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { IoCloseCircle } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { createRecipeAction } from "../../redux/recipes/recipes-actions";
+import { createRecipeAction, updateRecipeByIdAction } from "../../redux/recipes/recipes-actions";
+import { selectClickedRecipe } from "../../redux/recipes/recipes-selectors";
 
 import "./AddRecipePage.scss";
 
@@ -28,6 +29,7 @@ export const IngredientInput = ({ index, handleDeleteCustomInput, handleCustomIn
           id={`quantity-${index}`}
           min={1}
           max={10000}
+          step={0.1}
           value={values.quantity}
           required
           onChange={(e) => handleCustomInputChange(index, "ingredients", "quantity", e.target.value)}
@@ -88,8 +90,11 @@ export const StepInput = ({ index, handleDeleteCustomInput, handleCustomInputCha
   );
 };
 
-const AddRecipePage = ({ history }) => {
+const AddRecipePage = ({ history, location }) => {
   const dispatch = useDispatch();
+  const { pathname } = location;
+  const clickedRecipe = useSelector(selectClickedRecipe);
+  const clickedRecipeId = clickedRecipe?._id;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const imagesInput = useRef();
@@ -102,7 +107,6 @@ const AddRecipePage = ({ history }) => {
     category: "plat",
     themes: [],
     themesString: "",
-    // user: "6075b328d1fa521eb4ef2da8",
     ingredients: [
       {
         quantity: 1,
@@ -117,6 +121,25 @@ const AddRecipePage = ({ history }) => {
     ],
     otherLink: "",
   });
+
+  useEffect(() => {
+    if (pathname === "/modifier" && clickedRecipe) {
+      setRecipe({
+        title: clickedRecipe?.title,
+        description: clickedRecipe?.description,
+        difficulty: clickedRecipe?.difficulty,
+        time: clickedRecipe?.time,
+        images: clickedRecipe?.images,
+        actualImages: clickedRecipe?.images,
+        category: clickedRecipe?.category,
+        // themes: clickedRecipe?.themes,
+        themesString: clickedRecipe?.themes?.join(),
+        ingredients: clickedRecipe?.ingredients,
+        steps: clickedRecipe?.steps,
+        otherLink: clickedRecipe?.otherLink,
+      });
+    }
+  }, [clickedRecipe, pathname]);
 
   const handleAddIngredient = () => {
     setRecipe((prevState) => ({
@@ -176,20 +199,24 @@ const AddRecipePage = ({ history }) => {
   };
 
   const handleSubmit = useCallback(async () => {
-    setError(null);
+    setError("");
     setIsLoading(true);
     try {
       const recipeCopy = { ...recipe };
       recipeCopy.ingredients = JSON.stringify(recipeCopy.ingredients);
       recipeCopy.steps = JSON.stringify(recipeCopy.steps);
-      await dispatch(createRecipeAction(recipeCopy));
-      history.navigate("/");
+      if (pathname === "/modifier") {
+        await dispatch(updateRecipeByIdAction(recipeCopy, clickedRecipeId));
+      } else {
+        await dispatch(createRecipeAction(recipeCopy));
+      }
+      history.push("/");
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
       setError(error?.response?.data?.message || "Merci de vérifier les champs renseignés.");
     }
     setIsLoading(false);
-  }, [dispatch, history, recipe]);
+  }, [recipe, pathname, history, dispatch, clickedRecipeId]);
 
   useEffect(() => {
     const valuesArray = recipe.themesString.split(",").map((item) => item.trim());
@@ -197,15 +224,11 @@ const AddRecipePage = ({ history }) => {
     handleInputChange("themes", purValuesArray);
   }, [recipe.themesString]);
 
-  useEffect(() => {
-    if (error) {
-      window.scrollTo(0, 0);
-    }
-  }, [error]);
-
   return (
     <form className="AddRecipePage pageWrapWidth" onSubmit={(e) => e.preventDefault()}>
       <h1>Ajouter une recette</h1>
+
+      <p>Attention : si vous quittez la page, la recette ne sera pas sauvegardée.</p>
 
       <div className="form-group">
         <label htmlFor="title">
@@ -275,6 +298,7 @@ const AddRecipePage = ({ history }) => {
         </label>
         {recipe.ingredients.map((ingredient, index) => (
           <IngredientInput
+            key={`ingredient-${index}`}
             index={index}
             handleDeleteCustomInput={handleDeleteCustomInput}
             handleCustomInputChange={handleCustomInputChange}
@@ -297,6 +321,7 @@ const AddRecipePage = ({ history }) => {
         </label>
         {recipe.steps.map((step, index) => (
           <StepInput
+            key={`step-${index}`}
             index={index}
             handleDeleteCustomInput={handleDeleteCustomInput}
             handleCustomInputChange={handleCustomInputChange}
@@ -318,6 +343,20 @@ const AddRecipePage = ({ history }) => {
         <label htmlFor="images">
           <h2>Image(s)</h2> (attention, au maxiumum 3 images seront conservées)
         </label>
+        {pathname === "/modifier" ? (
+          <>
+            <p>Pour modifier les images, vous devrez re-sélectionner l'ensemble des images désirées. Vos images actuelles :</p>
+            <div className="actual-images">
+              {recipe?.actualImages?.length > 0
+                ? recipe.actualImages.map((img, index) => (
+                    <div className="actual-images__image" key={img}>
+                      <img src={img} alt="recipe illustration" />
+                    </div>
+                  ))
+                : "Aucune image pour le moment."}
+            </div>
+          </>
+        ) : null}
         <input
           ref={imagesInput}
           type="file"
@@ -347,7 +386,7 @@ const AddRecipePage = ({ history }) => {
       )}
 
       <CustomButton type="submit" onClick={handleSubmit} level="primary">
-        {isLoading ? "Chargement ..." : "Publier la recette"}
+        {isLoading ? "Chargement ..." : pathname === "/modifier" ? "Modifier la carte" : "Publier la recette"}
       </CustomButton>
     </form>
   );

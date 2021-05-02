@@ -32,6 +32,9 @@ const Routes = () => {
           <Route path="/publier">
             <AddRecipePage />
           </Route>
+          <Route path="/modifier">
+            <AddRecipePage />
+          </Route>
           <Route path="/favoris">
             <FavoritesPage />
           </Route>

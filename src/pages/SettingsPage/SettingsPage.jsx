@@ -70,14 +70,18 @@ const SettingsPage = () => {
 
   return (
     <>
-      <AlertOverlayPopup
-        message="Vous devez rafraichir la page pour prendre cette modification en compte."
-        actionOnClick={() => {
-          document.location.reload();
-          dispatch(closeOverlayMessageAction());
-        }}
-        actionText="Rafraichir"
-      />
+      <AlertOverlayPopup>
+        <p>Vous devez rafraichir la page pour prendre cette modification en compte.</p>
+        <CustomButton
+          level="primary"
+          onClick={() => {
+            document.location.reload();
+            dispatch(closeOverlayMessageAction());
+          }}
+        >
+          Rafraichir
+        </CustomButton>
+      </AlertOverlayPopup>
       <div className="SettingsPage pageWrapWidth">
         <h1>Paramètres</h1>
 

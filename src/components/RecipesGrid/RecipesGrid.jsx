@@ -25,7 +25,7 @@ const RecipesGrid = ({ recipes, isLoading }) => {
   return (
     <div className="RecipesGrid">
       {recipes?.map((recette) => (
-        <RecipeCard recipe={recette} />
+        <RecipeCard key={recette?._id} recipe={recette} />
       ))}
     </div>
   );

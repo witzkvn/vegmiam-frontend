@@ -116,6 +116,45 @@ export const createRecipeAction = (recipeObj) => {
   }
 }
 
+export const updateRecipeByIdAction = (recipeObj, recipeId) => {
+  return async (dispatch) => {
+    try {
+      const formData = new FormData()
+      Array.from(recipeObj.images).forEach(img => {
+        formData.append('images', img)
+      })
+      Object.keys(recipeObj).map((key, index) => {
+        if (key === "images") return false
+        return formData.append(key, recipeObj[key])
+      })
+
+      const res = await client().patch(`recipes/modify/${recipeId}`, formData)
+
+      if (res.status >= 300) {
+        throw new Error('Une erreur est survenue...')
+      }
+
+    } catch (error) {
+      throw error
+    }
+  }
+}
+export const deleteRecipeByIdAction = (recipeId) => {
+  return async (dispatch) => {
+    try {
+      const res = await client().delete(`recipes/delete/${recipeId}`)
+
+      if (res.status >= 300) {
+        throw new Error('Une erreur est survenue...')
+      }
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+}
+
 
 export const toggleFavRecipeAction = (recipeId) => {
   return async (dispatch) => {

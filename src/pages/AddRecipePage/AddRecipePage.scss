@@ -26,6 +26,11 @@
     box-shadow: $shadow-box;
   }
 
+  h1 ~ p {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
   &__error {
     margin-bottom: 1rem;
 
@@ -43,6 +48,20 @@
     h2 {
       margin-bottom: 0;
       display: inline-block;
+    }
+  }
+
+  .actual-images {
+    display: flex;
+    margin: 1rem auto;
+
+    &__image {
+      width: 30%;
+    }
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
   }
 
