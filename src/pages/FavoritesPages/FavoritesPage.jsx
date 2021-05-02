@@ -15,7 +15,7 @@ const FavoritesPage = () => {
     try {
       await dispatch(getFavoritesRecipesAction());
     } catch (error) {
-      setError(error.message);
+      setError(error?.response?.data?.message);
     }
     setIsLoading(false);
   }, [dispatch]);

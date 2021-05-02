@@ -14,6 +14,14 @@ export const closePopupMessageAction = () => ({
   type: LayoutActionTypes.CLOSE_POPUP_MESSAGE,
 });
 
+export const openOverlayMessageAction = () => ({
+  type: LayoutActionTypes.OPEN_OVERLAY_MESSAGE,
+});
+
+export const closeOverlayMessageAction = () => ({
+  type: LayoutActionTypes.CLOSE_OVERLAY_MESSAGE,
+});
+
 
 
 

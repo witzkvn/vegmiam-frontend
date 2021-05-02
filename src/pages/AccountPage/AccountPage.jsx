@@ -38,7 +38,7 @@ const AccountPage = ({ location }) => {
         setUserError(true);
       }
     } catch (error) {
-      setUserError(error.message);
+      setUserError(error?.response?.data?.message);
     }
     setIsUserLoading(false);
   }, [pathname, dispatch, currentUser]);
@@ -49,7 +49,7 @@ const AccountPage = ({ location }) => {
       try {
         await dispatch(getAllRecipesFromUserByIdAction(userId));
       } catch (error) {
-        setError(error.message);
+        setError(error?.response?.data?.message);
       }
       setIsLoading(false);
     },
@@ -100,10 +100,16 @@ const AccountPage = ({ location }) => {
 
   return (
     <div className="AccountPage">
-      <div className="AccountPage__header">
-        <UserHeader />
-      </div>
-      {error ? <p>Une erreur est survenue...</p> : <RecipesGrid recipes={recipesArray} isLoading={isLoading} />}
+      {error ? (
+        error
+      ) : (
+        <>
+          <div className="AccountPage__header">
+            <UserHeader />
+          </div>
+          <RecipesGrid recipes={recipesArray} isLoading={isLoading} />
+        </>
+      )}
     </div>
   );
 };

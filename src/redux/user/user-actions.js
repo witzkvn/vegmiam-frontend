@@ -80,4 +80,31 @@ export const updateUserAtion = (newSettingsObj) => {
   }
 }
 
+export const updateMyPasswordAtion = (passwordsObj) => {
+  return async dispatch => {
+
+    try {
+
+      const res = await client().patch(`users/updateMyPassword`, JSON.stringify(passwordsObj))
+
+      if (res.status >= 300) {
+        throw new Error('Une erreur est survenue...')
+      }
+
+      console.log(res)
+
+      if (res.data.data.user) {
+        dispatch(setCurrentUserAction(res.data.data.user))
+        localStorage.setItem('user', JSON.stringify(res.data.data.user))
+      }
+
+      if (res.data.token) {
+        localStorage.setItem('jwt', JSON.stringify(res.data.token))
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
 

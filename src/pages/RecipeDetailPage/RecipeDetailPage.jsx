@@ -29,7 +29,7 @@ const RecipeDetailPage = () => {
       try {
         await dispatch(getRecipeByIdAction(id));
       } catch (error) {
-        setError(error.message);
+        setError(error?.response?.data?.message);
       }
       setIsLoading(false);
     },

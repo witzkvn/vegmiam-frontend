@@ -7,7 +7,8 @@ const INITIAL_STATE = {
     active: false,
     status: null,
     message: ""
-  }
+  },
+  overlayMessageOpen: false
 };
 
 const layoutReducer = (state = INITIAL_STATE, action) => {
@@ -37,6 +38,16 @@ const layoutReducer = (state = INITIAL_STATE, action) => {
           status: null,
           message: ""
         }
+      }
+    case LayoutActionTypes.OPEN_OVERLAY_MESSAGE:
+      return {
+        ...state,
+        overlayMessageOpen: true
+      }
+    case LayoutActionTypes.CLOSE_OVERLAY_MESSAGE:
+      return {
+        ...state,
+        overlayMessageOpen: false
       }
     default:
       return state;

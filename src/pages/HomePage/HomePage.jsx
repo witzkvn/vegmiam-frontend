@@ -15,7 +15,7 @@ const HomePage = () => {
     try {
       await dispatch(getAllRecipesAction());
     } catch (error) {
-      setError(error.message);
+      setError(error?.response?.data?.message);
     }
     setIsLoading(false);
   }, [dispatch]);
@@ -26,7 +26,7 @@ const HomePage = () => {
   }, [fetchRecipes]);
 
   if (error) {
-    return <p>Une erreur est survenue : {error}</p>;
+    return <p>Une erreur est survenue : {error || "essayez de rafraichir la page ou de vous reconnecter."}</p>;
   }
 
   return (
