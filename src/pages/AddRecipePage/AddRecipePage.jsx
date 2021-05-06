@@ -210,7 +210,7 @@ const AddRecipePage = ({ history, location }) => {
       } else {
         await dispatch(createRecipeAction(recipeCopy));
       }
-      history.push("/");
+      // history.push("/");
     } catch (error) {
       console.log(error);
       setError(error?.response?.data?.message || "Merci de vérifier les champs renseignés.");

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RecipeCard from "../RecipeCard/RecipeCard";
 
 import "./RecipesGrid.scss";
 
 const RecipesGrid = ({ recipes, isLoading }) => {
+  useEffect(() => {
+    return () => {
+      console.log();
+    };
+  }, []);
   if (isLoading) {
     return (
       <div className="RecipesGrid">
