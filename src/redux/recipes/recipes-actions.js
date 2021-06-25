@@ -1,5 +1,6 @@
 import { client } from '../..';
 import { openPopupMessageAction } from '../layout/layout-actions';
+import { setCurrentPage, setTotalPages } from '../search/search-actions';
 import { setCurrentUserAction } from '../user/user-actions';
 import { RecipesActionTypes } from './recipes-types';
 
@@ -33,10 +34,11 @@ export const setRecipesArray = (recipes) => ({
 });
 
 
-export const getAllRecipesAction = () => {
+
+export const getAllRecipesAction = (fetchUrl) => {
   return async (dispatch) => {
     try {
-      const res = await client().get('recipes/?fields=title,slug,images,time,difficulty,ratingsAverage')
+      const res = await client().get(`recipes/?fields=title,slug,images,time,difficulty,ratingsAverage${fetchUrl}`)
 
       if (res.status >= 300) {
         throw new Error('Une erreur est survenue...')
@@ -44,6 +46,8 @@ export const getAllRecipesAction = () => {
 
       if (res.data.data.data) {
         dispatch(setRecipesArray(res.data.data.data))
+        dispatch(setTotalPages(res.data.totalPages))
+        dispatch(setCurrentPage(res.data.page))
       }
     } catch (error) {
       throw error
@@ -80,6 +84,8 @@ export const getFavoritesRecipesAction = () => {
 
       if (res.data.data.data) {
         dispatch(setRecipesArray(res.data.data.data))
+        dispatch(setTotalPages(res.data.totalPages))
+        dispatch(setCurrentPage(res.data.page))
       }
     } catch (error) {
       throw error

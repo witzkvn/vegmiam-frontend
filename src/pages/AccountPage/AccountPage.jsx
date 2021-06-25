@@ -6,7 +6,7 @@ import RecipesGrid from "../../components/RecipesGrid/RecipesGrid";
 import { selectClickedUser, selectCurrentUser } from "../../redux/user/user-selectors";
 
 import "./AccountPage.scss";
-import { getAllRecipesFromUserByIdAction } from "../../redux/recipes/recipes-actions";
+import { getAllRecipesFromUserByIdAction, setRecipesArray } from "../../redux/recipes/recipes-actions";
 import { selectRecipesArray } from "../../redux/recipes/recipes-selectors";
 import { getUserByIdAction, setClickedUserAction } from "../../redux/user/user-actions";
 
@@ -59,7 +59,11 @@ const AccountPage = ({ location }) => {
   useEffect(() => {
     setIsUserLoading(true);
     getUser().then(() => setIsUserLoading(false));
-  }, [getUser]);
+
+    return () => {
+      dispatch(setRecipesArray([]));
+    };
+  }, [dispatch, getUser]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -107,7 +111,7 @@ const AccountPage = ({ location }) => {
           <div className="AccountPage__header">
             <UserHeader />
           </div>
-          <RecipesGrid recipes={recipesArray} isLoading={isLoading} />
+          <RecipesGrid isLoading={isLoading} />
         </>
       )}
     </div>

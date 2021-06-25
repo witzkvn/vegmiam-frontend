@@ -3,6 +3,7 @@ import { RecipesActionTypes } from './recipes-types';
 const INITIAL_STATE = {
   clickedRecipe: null,
   recipesArray: null,
+
   errors: null,
 };
 

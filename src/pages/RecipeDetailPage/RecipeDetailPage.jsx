@@ -47,7 +47,7 @@ const RecipeDetailPage = ({ history }) => {
   useEffect(() => {
     setIsLoading(true);
     fetchRecipe(id);
-    document.getElementsByClassName("App__right")[0].scrollTo(0, 0);
+    document.getElementsByClassName("App__right")[0]?.scrollTo(0, 0);
   }, [id, fetchRecipe]);
 
   if (error) {

@@ -1,0 +1,17 @@
+@import "../../theme/all";
+
+.Pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+
+  & .CustomButton {
+    border-radius: $radius-round;
+    height: 3rem;
+    width: 3rem;
+    &:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+  }
+}

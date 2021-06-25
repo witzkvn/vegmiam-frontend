@@ -31,4 +31,17 @@
       background-color: var(--secondary-dark);
     }
   }
+  &-transparent {
+    color: inherit;
+    background-color: transparent;
+    border: 1px solid var(--grey-medium);
+
+    &:hover {
+      color: var(--primary-light);
+    }
+    &:active {
+      color: var(--text-white);
+      background-color: var(--primary-light);
+    }
+  }
 }

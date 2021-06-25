@@ -1,0 +1,8 @@
+@import "../../theme/all";
+
+.SearchFilters {
+  margin-top: 1rem;
+  border: 0.1rem solid var(--primary-medium);
+  padding: $padding-sm;
+  border-radius: $radius-lg;
+}

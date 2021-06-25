@@ -8,9 +8,9 @@ import ProtectedRoute from "./ProtectedRoute";
 
 // console.log(HomePage);
 
-// import HomePage from "./pages/HomePage/HomePage";
+import HomePage from "../pages/HomePage/HomePage";
 
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+// const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const RecipeDetailPage = lazy(() => import("../pages/RecipeDetailPage/RecipeDetailPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 const AddRecipePage = lazy(() => import("../pages/AddRecipePage/AddRecipePage"));

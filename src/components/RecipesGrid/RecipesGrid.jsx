@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import Pagination from "../Pagination/Pagination";
 import RecipeCard from "../RecipeCard/RecipeCard";
 
 import "./RecipesGrid.scss";
 
-const RecipesGrid = ({ recipes, isLoading }) => {
+import { selectRecipesArray } from "../../redux/recipes/recipes-selectors";
+import { useEffect } from "react";
+
+const RecipesGrid = ({ isLoading }) => {
+  const recipesArray = useSelector(selectRecipesArray);
+
   useEffect(() => {
-    return () => {
-      console.log();
-    };
-  }, []);
+    document.getElementsByClassName("App__right")[0].scrollTo(0, 0);
+  }, [recipesArray]);
+
   if (isLoading) {
     return (
       <div className="RecipesGrid">
@@ -24,15 +30,19 @@ const RecipesGrid = ({ recipes, isLoading }) => {
       </div>
     );
   }
-  if (!recipes) {
+  if (!recipesArray) {
     return <p>Aucun favoris pour le moment.</p>;
   }
+
   return (
-    <div className="RecipesGrid">
-      {recipes?.map((recette) => (
-        <RecipeCard key={recette?._id} recipe={recette} />
-      ))}
-    </div>
+    <>
+      <div className="RecipesGrid">
+        {recipesArray?.map((recette) => (
+          <RecipeCard key={recette?._id} recipe={recette} />
+        ))}
+      </div>
+      <Pagination />
+    </>
   );
 };
 

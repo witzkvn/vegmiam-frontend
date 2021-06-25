@@ -78,14 +78,13 @@
     width: 100%;
     // padding: 0 $padding-container;
 
-    &--top {
+    &--fixed {
       padding: 1rem $padding-container;
       width: 100%;
-      display: flex;
       position: sticky;
       top: 0;
       left: 0;
-      background-color: var(--bg-dark);
+      background-color: var(--bg-darker);
       z-index: 90;
 
       & h1 {
@@ -93,8 +92,22 @@
       }
     }
 
+    &--top {
+      display: flex;
+    }
+
     &--menu {
       @include menu-logo;
+    }
+
+    &--filter {
+      margin-left: auto;
+
+      svg.active {
+        animation: 0.3s cubic-bezier(0.58, 0.37, 0.38, 1.58) upsideDown;
+        animation-fill-mode: forwards;
+        color: var(--primary-dark);
+      }
     }
   }
 }

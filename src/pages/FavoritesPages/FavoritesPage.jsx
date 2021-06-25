@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import RecipesGrid from "../../components/RecipesGrid/RecipesGrid";
-import { selectRecipesArray } from "../../redux/recipes/recipes-selectors";
-import { getFavoritesRecipesAction } from "../../redux/recipes/recipes-actions";
+import { getFavoritesRecipesAction, setRecipesArray } from "../../redux/recipes/recipes-actions";
+
+import "./FavoritesPage.scss";
 
 const FavoritesPage = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const recipesArray = useSelector(selectRecipesArray);
 
   const fetchRecipes = useCallback(async () => {
     setError(null);
@@ -23,15 +23,20 @@ const FavoritesPage = () => {
   useEffect(() => {
     setIsLoading(true);
     fetchRecipes().then(() => setIsLoading(false));
-  }, [fetchRecipes]);
+
+    return () => {
+      dispatch(setRecipesArray([]));
+    };
+  }, [dispatch, fetchRecipes]);
 
   if (error) {
     return <p>Une erreur est survenue : {error}</p>;
   }
 
   return (
-    <div className="HomePage">
-      <RecipesGrid recipes={recipesArray} isLoading={isLoading} />
+    <div className="FavoritesPage">
+      <h1>Vos Favoris</h1>
+      <RecipesGrid isLoading={isLoading} />
     </div>
   );
 };
