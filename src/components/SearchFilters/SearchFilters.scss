@@ -1,8 +1,9 @@
 @import "../../theme/all";
 
 .SearchFilters {
-  margin-top: 1rem;
-  border: 0.1rem solid var(--primary-medium);
-  padding: $padding-sm;
-  border-radius: $radius-lg;
+  @include overlay-bg;
+
+  &__wrapper {
+    @include overlay-inside;
+  }
 }

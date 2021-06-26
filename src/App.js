@@ -18,6 +18,12 @@ const App = () => {
   const [navOpen, setNavOpen] = useState(false)
   const [filtersOpen, setFiltersOpen] = useState(false)
 
+  const onClose = (e) => {
+    e.stopPropagation();
+    setFiltersOpen(false)
+
+  }
+
 
   if (!currentUser) {
     return (
@@ -54,10 +60,10 @@ const App = () => {
                 </div>
                 <Searchbar />
               </div>
-              <div className="App__right--bottom">
-                {filtersOpen && <SearchFilters />}
-              </div>
+              {/* <div className="App__right--bottom">
+              </div> */}
             </div>
+            {filtersOpen && <SearchFilters onClose={onClose} />}
           </>
         )
         }
