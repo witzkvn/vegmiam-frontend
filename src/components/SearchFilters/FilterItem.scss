@@ -1,0 +1,14 @@
+@import "../../theme/all";
+
+.FilterItem {
+  border-radius: $radius-md;
+  border: 2px solid var(--bg-dark);
+  background-color: var(--bg-medium);
+  padding: $padding-xs;
+  cursor: pointer;
+
+  &.active {
+    border: 2px solid var(--secondary-medium);
+    background-color: var(--secondary-pale);
+  }
+}

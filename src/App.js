@@ -11,18 +11,51 @@ import Login from './components/Login/Login';
 import NotificationPoper from './components/NotificationPoper/NotificationPoper';
 import { selectOverlayMessageOpen } from './redux/layout/layout-selectors';
 import SearchFilters from './components/SearchFilters/SearchFilters';
+import { useEffect } from 'react';
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser)
   const overlayOpen = useSelector(selectOverlayMessageOpen)
   const [navOpen, setNavOpen] = useState(false)
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [search, setSearch] = useState();
+  const [newSearchState, setNewSearchState] = useState({
+    searchWords: search,
+    searchDifficulty: [],
+    searchDuration: [],
+    searchOrder: "recent",
+    searchCategory: [],
+    searchPage: 1,
+  });
 
   const onClose = (e) => {
     e.stopPropagation();
     setFiltersOpen(false)
-
   }
+
+  const focusSearch = (e) => {
+    e.stopPropagation();
+    setFiltersOpen(true)
+  }
+
+  const getFilters = (filters) => {
+    setNewSearchState({
+      searchWords: search,
+      searchDifficulty: filters.searchDifficulty,
+      searchDuration: filters.searchDuration,
+      searchCategory: filters.searchCategory,
+      searchOrder: "recent",
+      searchPage: 1,
+    })
+  }
+
+  const launchSearch = () => {
+    console.log(search)
+  }
+
+  useEffect(() => {
+    console.log(newSearchState);
+  }, [newSearchState]);
 
 
   if (!currentUser) {
@@ -55,15 +88,10 @@ const App = () => {
                 <NavLink exact to="/">
                   <h1>Vegmiam</h1>
                 </NavLink>
-                <div className="App__right--menu App__right--filter" onClick={() => setFiltersOpen(prevState => !prevState)}>
-                  <IoFilter className={`${filtersOpen ? "active" : ""}`} />
-                </div>
-                <Searchbar />
+                <Searchbar setSearch={setSearch} search={search} focusSearch={focusSearch} />
               </div>
-              {/* <div className="App__right--bottom">
-              </div> */}
             </div>
-            {filtersOpen && <SearchFilters onClose={onClose} />}
+            {filtersOpen && <SearchFilters onClose={onClose} getFilters={getFilters} />}
           </>
         )
         }

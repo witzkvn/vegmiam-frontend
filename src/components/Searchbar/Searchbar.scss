@@ -1,18 +1,16 @@
 @import "../../theme/all";
 
 .Searchbar {
-  display: flex;
-  width: min-content;
-  box-shadow: $shadow-box;
+  // box-shadow: $shadow-box;
+  border: 1px solid var(--grey-dark);
+  margin: 0 2rem;
+  width: 100%;
+  border-radius: $radius-lg;
 
   & input {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    height: 100%;
+    width: 100%;
     margin-bottom: 0;
-  }
-
-  &__button {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: $radius-lg;
   }
 }

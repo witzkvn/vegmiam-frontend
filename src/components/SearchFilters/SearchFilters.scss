@@ -2,8 +2,37 @@
 
 .SearchFilters {
   @include overlay-bg;
+  align-items: flex-start;
 
   &__wrapper {
     @include overlay-inside;
+    width: 60vw;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    h2 {
+      text-align: center;
+    }
+
+    h4 {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__options {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    & .FilterItem {
+      margin: 0.5rem;
+    }
+  }
+
+  &__save {
+    & .CustomButton {
+      margin: 1rem auto 0 auto;
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
   }
 }
