@@ -100,14 +100,12 @@
       @include menu-logo;
     }
 
-    // &--filter {
-    //   margin-left: auto;
-
-    //   svg.active {
-    //     animation: 0.3s cubic-bezier(0.58, 0.37, 0.38, 1.58) upsideDown;
-    //     animation-fill-mode: forwards;
-    //     color: var(--primary-dark);
-    //   }
-    // }
+    & .Searchbar ~ .UserAvatar__link {
+      margin-left: 4rem;
+      & .UserAvatar {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
   }
 }

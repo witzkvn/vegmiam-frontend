@@ -1,17 +1,29 @@
 @import "../../theme/all";
 
 .SearchFilters {
-  @include overlay-bg;
-  align-items: flex-start;
+  // @include overlay-bg;
+  // height: 200vh;
+  // width: 200vw;
 
   &__wrapper {
     @include overlay-inside;
-    width: 60vw;
+    width: 100%;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 0;
+    align-items: flex-start;
+    visibility: hidden;
+    box-shadow: $shadow-large;
+
+    &.active {
+      visibility: visible;
+    }
 
     h2 {
       text-align: center;
+      margin: 0 auto 2rem auto;
     }
 
     h4 {
@@ -29,10 +41,10 @@
   }
 
   &__save {
+    width: 100%;
     & .CustomButton {
       margin: 1rem auto 0 auto;
-      padding-left: 6rem;
-      padding-right: 6rem;
+      width: 60%;
     }
   }
 }

@@ -4,59 +4,18 @@ import Navigation from './components/Navigation/Navigation';
 import Searchbar from './components/Searchbar/Searchbar';
 import { selectCurrentUser } from './redux/user/user-selectors';
 import Routes from './routes/Routes';
-import { IoMenu, IoFilter } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Login from './components/Login/Login';
 import NotificationPoper from './components/NotificationPoper/NotificationPoper';
 import { selectOverlayMessageOpen } from './redux/layout/layout-selectors';
-import SearchFilters from './components/SearchFilters/SearchFilters';
-import { useEffect } from 'react';
+import UserAvatar from './components/UserAvatar/UserAvatar';
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser)
   const overlayOpen = useSelector(selectOverlayMessageOpen)
   const [navOpen, setNavOpen] = useState(false)
-  const [filtersOpen, setFiltersOpen] = useState(false)
-  const [search, setSearch] = useState();
-  const [newSearchState, setNewSearchState] = useState({
-    searchWords: search,
-    searchDifficulty: [],
-    searchDuration: [],
-    searchOrder: "recent",
-    searchCategory: [],
-    searchPage: 1,
-  });
-
-  const onClose = (e) => {
-    e.stopPropagation();
-    setFiltersOpen(false)
-  }
-
-  const focusSearch = (e) => {
-    e.stopPropagation();
-    setFiltersOpen(true)
-  }
-
-  const getFilters = (filters) => {
-    setNewSearchState({
-      searchWords: search,
-      searchDifficulty: filters.searchDifficulty,
-      searchDuration: filters.searchDuration,
-      searchCategory: filters.searchCategory,
-      searchOrder: "recent",
-      searchPage: 1,
-    })
-  }
-
-  const launchSearch = () => {
-    console.log(search)
-  }
-
-  useEffect(() => {
-    console.log(newSearchState);
-  }, [newSearchState]);
-
 
   if (!currentUser) {
     return (
@@ -88,17 +47,14 @@ const App = () => {
                 <NavLink exact to="/">
                   <h1>Vegmiam</h1>
                 </NavLink>
-                <Searchbar setSearch={setSearch} search={search} focusSearch={focusSearch} />
+                <Searchbar />
+                <UserAvatar imgSrc={currentUser?.avatar} toAccount={true} />
               </div>
             </div>
-            {filtersOpen && <SearchFilters onClose={onClose} getFilters={getFilters} />}
           </>
         )
         }
-
         <Routes />
-
-
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import "./SearchFilters.scss";
 import CustomButton from "../CustomButton/CustomButton";
 import { useEffect } from "react";
 
-const SearchFilters = ({ onClose, getFilters }) => {
+const SearchFilters = ({ getFilters, active }) => {
   const { searchDifficulty, searchDuration, searchOrder, searchCategory } = useSelector(selectSearchParams);
   const [newSearchState, setNewSearchState] = useState({
     searchDifficulty: [],
@@ -38,76 +38,76 @@ const SearchFilters = ({ onClose, getFilters }) => {
   };
 
   return (
-    <div className="SearchFilters" onClick={onClose}>
-      <div className="SearchFilters__wrapper" onClick={(e) => e.stopPropagation()}>
-        <h2>Ajouter des filtres</h2>
-        <div className="SearchFilters__filter-group">
-          <h4>Durée</h4>
-          <div className="SearchFilters__options">
-            <FilterItem group="searchDuration" value="15" toggleSelect={toggleSelect}>
-              Moins de 15 min
-            </FilterItem>
-            <FilterItem group="searchDuration" value="30" toggleSelect={toggleSelect}>
-              Moins de 30 min
-            </FilterItem>
-            <FilterItem group="searchDuration" value="60" toggleSelect={toggleSelect}>
-              Moins de 60 min
-            </FilterItem>
-          </div>
-        </div>
-        <div className="SearchFilters__filter-group">
-          <h4>Difficulté</h4>
-          <div className="SearchFilters__options">
-            <FilterItem group="searchDifficulty" value="facile" toggleSelect={toggleSelect}>
-              Facile
-            </FilterItem>
-            <FilterItem group="searchDifficulty" value="moyen" toggleSelect={toggleSelect}>
-              Moyenne
-            </FilterItem>
-            <FilterItem group="searchDifficulty" value="difficile" toggleSelect={toggleSelect}>
-              Difficile
-            </FilterItem>
-          </div>
-        </div>
-        <div className="SearchFilters__filter-group">
-          <h4>Catégorie</h4>
-          <div className="SearchFilters__options">
-            <FilterItem group="searchCategory" value="apero" toggleSelect={toggleSelect}>
-              Apéro
-            </FilterItem>
-            <FilterItem group="searchCategory" value="entree" toggleSelect={toggleSelect}>
-              Entrées
-            </FilterItem>
-            <FilterItem group="searchCategory" value="plat" toggleSelect={toggleSelect}>
-              Plat
-            </FilterItem>
-            <FilterItem group="searchCategory" value="dessert" toggleSelect={toggleSelect}>
-              Dessert
-            </FilterItem>
-            <FilterItem group="searchCategory" value="snack" toggleSelect={toggleSelect}>
-              Snack
-            </FilterItem>
-            <FilterItem group="searchCategory" value="fauxmage" toggleSelect={toggleSelect}>
-              Fauxmage
-            </FilterItem>
-            <FilterItem group="searchCategory" value="petit-dejeuner" toggleSelect={toggleSelect}>
-              Petit-déjeuner
-            </FilterItem>
-            <FilterItem group="searchCategory" value="boisson" toggleSelect={toggleSelect}>
-              Boisson
-            </FilterItem>
-            <FilterItem group="searchCategory" value="autre" toggleSelect={toggleSelect}>
-              Autre
-            </FilterItem>
-          </div>
-        </div>
-        <div className="SearchFilters__save">
-          <CustomButton level="primary" onClick={sendFilters}>
-            Manger !
-          </CustomButton>
+    // <div className="SearchFilters" onClick={onClose}>
+    <div className={`SearchFilters__wrapper ${active && "active"}`} onClick={(e) => e.stopPropagation()}>
+      <h2>Ajouter des filtres</h2>
+      <div className="SearchFilters__filter-group">
+        <h4>Durée</h4>
+        <div className="SearchFilters__options">
+          <FilterItem group="searchDuration" value="15" toggleSelect={toggleSelect}>
+            Moins de 15 min
+          </FilterItem>
+          <FilterItem group="searchDuration" value="30" toggleSelect={toggleSelect}>
+            Moins de 30 min
+          </FilterItem>
+          <FilterItem group="searchDuration" value="60" toggleSelect={toggleSelect}>
+            Moins de 60 min
+          </FilterItem>
         </div>
       </div>
+      <div className="SearchFilters__filter-group">
+        <h4>Difficulté</h4>
+        <div className="SearchFilters__options">
+          <FilterItem group="searchDifficulty" value="facile" toggleSelect={toggleSelect}>
+            Facile
+          </FilterItem>
+          <FilterItem group="searchDifficulty" value="moyen" toggleSelect={toggleSelect}>
+            Moyenne
+          </FilterItem>
+          <FilterItem group="searchDifficulty" value="difficile" toggleSelect={toggleSelect}>
+            Difficile
+          </FilterItem>
+        </div>
+      </div>
+      <div className="SearchFilters__filter-group">
+        <h4>Catégorie</h4>
+        <div className="SearchFilters__options">
+          <FilterItem group="searchCategory" value="apero" toggleSelect={toggleSelect}>
+            Apéro
+          </FilterItem>
+          <FilterItem group="searchCategory" value="entree" toggleSelect={toggleSelect}>
+            Entrées
+          </FilterItem>
+          <FilterItem group="searchCategory" value="plat" toggleSelect={toggleSelect}>
+            Plat
+          </FilterItem>
+          <FilterItem group="searchCategory" value="dessert" toggleSelect={toggleSelect}>
+            Dessert
+          </FilterItem>
+          <FilterItem group="searchCategory" value="snack" toggleSelect={toggleSelect}>
+            Snack
+          </FilterItem>
+          <FilterItem group="searchCategory" value="fauxmage" toggleSelect={toggleSelect}>
+            Fauxmage
+          </FilterItem>
+          <FilterItem group="searchCategory" value="petit-dejeuner" toggleSelect={toggleSelect}>
+            Petit-déjeuner
+          </FilterItem>
+          <FilterItem group="searchCategory" value="boisson" toggleSelect={toggleSelect}>
+            Boisson
+          </FilterItem>
+          <FilterItem group="searchCategory" value="autre" toggleSelect={toggleSelect}>
+            Autre
+          </FilterItem>
+        </div>
+      </div>
+      <div className="SearchFilters__save">
+        <CustomButton level="primary" onClick={sendFilters}>
+          Manger !
+        </CustomButton>
+      </div>
     </div>
+    // </div>
   );
 };
 
