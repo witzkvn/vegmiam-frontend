@@ -15,7 +15,7 @@
     left: 0;
     align-items: flex-start;
     visibility: hidden;
-    box-shadow: $shadow-large;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0 3px 3px rgba(0, 0, 0, 0.2);
 
     &.active {
       visibility: visible;
@@ -42,9 +42,14 @@
 
   &__save {
     width: 100%;
+    display: flex;
+    justify-content: center;
     & .CustomButton {
-      margin: 1rem auto 0 auto;
-      width: 60%;
+      margin: 1rem;
+      width: 25%;
+      transition: visibility 0s ease;
+      transition: background-color 0.2s ease;
+      transition: border 0.2s ease;
     }
   }
 }

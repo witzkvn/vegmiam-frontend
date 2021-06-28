@@ -3,10 +3,10 @@ import { SearchActionTypes } from "./search-types";
 
 const params = (new URL(document.location)).searchParams;
 const query = params.get('query')
-const difficulty = params.get('difficulty')
-const time = params.get('time')
+const difficulty = params.get('difficulty')?.split(',')
+const time = params.get('time')?.split(',')
 const sort = params.get('sort')
-const category = params.get('category')
+const category = params.get('category')?.split(',')
 const page = params.get('page')
 
 const INITIAL_STATE = {
@@ -14,10 +14,10 @@ const INITIAL_STATE = {
   currentPage: 1,
   searchParams: {
     searchWords: (query && decodeURI(query)) || "",
-    searchDifficulty: difficulty || "",
-    searchDuration: time || "",
-    searchOrder: sort || "",
-    searchCategory: category || "",
+    searchDifficulty: difficulty || [],
+    searchDuration: time || [],
+    searchOrder: sort || "-createdAt",
+    searchCategory: category || [],
     searchPage: page || 1
   },
   errors: null

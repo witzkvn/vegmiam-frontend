@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { IoSearch } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
+import { getSearchApiUrl } from "../../helper/functions/getSearchApiUrl";
+import { getAllRecipesAction } from "../../redux/recipes/recipes-actions";
 import { setSearchParams } from "../../redux/search/search-actions";
 import { selectSearchParams } from "../../redux/search/search-selectors";
 import SearchFilters from "../SearchFilters/SearchFilters";
@@ -11,25 +13,17 @@ import "./Searchbar.scss";
 
 const Searchbar = () => {
   // const [search, setSearch] = useState();
-  const { searchWords } = useSelector(selectSearchParams);
+  const searchObj = useSelector(selectSearchParams);
   const dispatch = useDispatch();
   const searchInputEl = useRef();
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [search, setSearch] = useState();
-  const [newSearchState, setNewSearchState] = useState({
-    searchWords: search,
-    searchDifficulty: [],
-    searchDuration: [],
-    searchOrder: "recent",
-    searchCategory: [],
-    searchPage: 1,
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   const onClose = useCallback(
     (e) => {
       if (filtersOpen && searchInputEl.current && !searchInputEl.current.contains(e.target)) {
         setFiltersOpen(false);
-        console.log("call");
       }
       e.stopPropagation();
     },
@@ -38,7 +32,11 @@ const Searchbar = () => {
 
   const handleChange = (e) => {
     const newSearch = e.target.value;
-    setSearch(newSearch);
+    dispatch(
+      setSearchParams({
+        searchWords: newSearch,
+      })
+    );
   };
 
   const focusSearch = (e) => {
@@ -46,15 +44,23 @@ const Searchbar = () => {
     setFiltersOpen(true);
   };
 
-  const getFilters = (filters) => {
-    setNewSearchState({
-      searchWords: search,
-      searchDifficulty: filters.searchDifficulty,
-      searchDuration: filters.searchDuration,
-      searchCategory: filters.searchCategory,
-      searchOrder: "recent",
-      searchPage: 1,
-    });
+  const fetchRecipes = useCallback(
+    async (fetchUrl) => {
+      setError(null);
+      try {
+        await dispatch(getAllRecipesAction(fetchUrl));
+      } catch (error) {
+        setError(error?.response?.data?.message);
+      }
+      setIsLoading(false);
+    },
+    [dispatch]
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchRecipes(getSearchApiUrl(searchObj));
+    setFiltersOpen(false);
   };
 
   useEffect(() => {
@@ -66,10 +72,10 @@ const Searchbar = () => {
 
   return (
     <>
-      <div className="Searchbar" ref={searchInputEl}>
-        <input type="text" placeholder="Recherche..." onChange={handleChange} onFocus={focusSearch} value={search} />
-        <SearchFilters active={filtersOpen} onClose={onClose} getFilters={getFilters} />
-      </div>
+      <form className="Searchbar" ref={searchInputEl} onSubmit={handleSubmit}>
+        <input type="text" placeholder="Recherche..." onChange={handleChange} onFocus={focusSearch} value={searchObj?.searchWords} />
+        <SearchFilters active={filtersOpen} onClose={onClose} />
+      </form>
     </>
   );
 };

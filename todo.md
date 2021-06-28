@@ -3,7 +3,7 @@
 - ajouter sans gluten ?
 - Ajouter bouton signaler
 - pagination pour favoris et compte (faire et vérifier)
-- filtres
-- recherche avec filtres et mots
-- avatar menu compte + deconnexion navbar
-- bouton reset all filtres pour la recherche
+- Ajouter ordre de tri
+- recherche avec filtres et mots -> getSearchApiUrl à modif pour avoir bon url de call
+- ajouter un petit bouton recherche à droite de la searchbar ?
+- avatar menu compte + deconnexion navbar / bouton publi recette

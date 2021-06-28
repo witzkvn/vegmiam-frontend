@@ -31,7 +31,8 @@ const HomePage = () => {
     return () => {
       dispatch(setRecipesArray([]));
     };
-  }, [dispatch, fetchRecipes, searchObj]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, fetchRecipes]);
 
   if (error) {
     return <p>Une erreur est survenue : {error}</p>;

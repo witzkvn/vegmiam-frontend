@@ -3,20 +3,14 @@ import { useState } from "react";
 
 import "./FilterItem.scss";
 
-const FilterItem = ({ children, value, group, filterValue, toggleSelect }) => {
-  const [isSelected, setIsSelected] = useState(false);
-
+const FilterItem = ({ children, isSelectedInStore, value, group, filterValue, toggleSelect }) => {
   const handleClick = (e) => {
     e.stopPropagation();
-    toggleSelect(group, value, !isSelected);
-    setIsSelected((prevState) => !prevState);
+    toggleSelect(group, value, !isSelectedInStore);
   };
 
-  // useEffect(() => {
-  // }, [group, isSelected, toggleSelect, value]);
-
   return (
-    <div className={`FilterItem ${isSelected ? "active" : ""}`} onClick={handleClick}>
+    <div className={`FilterItem ${isSelectedInStore ? "active" : ""}`} onClick={handleClick}>
       {children}
     </div>
   );
