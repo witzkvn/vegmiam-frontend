@@ -1,8 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import ErrorBoundary from "./ErrorBoundary";
 import LoadingPage from "../pages/LoadingPage/LoadingPage";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../redux/user/user-selectors";
 import { Redirect, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -11,10 +9,16 @@ import ProtectedRoute from "./ProtectedRoute";
 import HomePage from "../pages/HomePage/HomePage";
 
 // const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-const RecipeDetailPage = lazy(() => import("../pages/RecipeDetailPage/RecipeDetailPage"));
+const RecipeDetailPage = lazy(() =>
+  import("../pages/RecipeDetailPage/RecipeDetailPage")
+);
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
-const AddRecipePage = lazy(() => import("../pages/AddRecipePage/AddRecipePage"));
-const FavoritesPage = lazy(() => import("../pages/FavoritesPages/FavoritesPage"));
+const AddRecipePage = lazy(() =>
+  import("../pages/AddRecipePage/AddRecipePage")
+);
+const FavoritesPage = lazy(() =>
+  import("../pages/FavoritesPages/FavoritesPage")
+);
 const AccountPage = lazy(() => import("../pages/AccountPage/AccountPage"));
 const SettingsPage = lazy(() => import("../pages/SettingsPage/SettingsPage"));
 
@@ -23,46 +27,36 @@ const Routes = () => {
     <ErrorBoundary>
       <Suspense fallback={<LoadingPage />}>
         <Switch>
-          <Route exact path="/">
+          <ProtectedRoute exact path="/">
             <HomePage />
-          </Route>
-          <Route path="/recette/:id">
+          </ProtectedRoute>
+          <ProtectedRoute path="/recette/:id">
             <RecipeDetailPage />
-          </Route>
-          <Route path="/publier">
+          </ProtectedRoute>
+          <ProtectedRoute path="/publier">
             <AddRecipePage />
-          </Route>
-          <Route path="/modifier">
+          </ProtectedRoute>
+          <ProtectedRoute path="/modifier">
             <AddRecipePage />
-          </Route>
-          <Route path="/favoris">
+          </ProtectedRoute>
+          <ProtectedRoute path="/favoris">
             <FavoritesPage />
-          </Route>
-          <Route path="/compte">
+          </ProtectedRoute>
+          <ProtectedRoute path="/compte">
             <AccountPage />
-          </Route>
-          <Route path="/chef/:userid">
+          </ProtectedRoute>
+          <ProtectedRoute path="/chef/:userid">
             <AccountPage />
-          </Route>
-          <Route path="/parametres">
+          </ProtectedRoute>
+          <ProtectedRoute path="/parametres">
             <SettingsPage />
-          </Route>
-          <Route path="/not-found">
+          </ProtectedRoute>
+          <ProtectedRoute path="/not-found">
             <NotFoundPage />
-          </Route>
+          </ProtectedRoute>
           <Redirect to="/not-found" />
         </Switch>
       </Suspense>
-      {/* <Switch>
-         {currentUser && (
-           <>
-             <Route path="/recette/:recette_id" component={RecipeDetailPage} />
-           </>
-         )}
-         <Route path="/" component={HomePage} />
-         <Route path="/not-found" component={NotFoundPage} />
-         <Redirect to="/not-found" />
-       </Switch>  */}
     </ErrorBoundary>
   );
 };

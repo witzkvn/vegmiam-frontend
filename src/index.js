@@ -26,7 +26,7 @@ const getHeadersKeys = () => {
 //   })
 // }
 
-export const client = async () => {
+export const client = () => {
   if (process.env.NODE_ENV === "development") {
     return axios.create({
       baseURL: "http://localhost:3000/api/v1/",

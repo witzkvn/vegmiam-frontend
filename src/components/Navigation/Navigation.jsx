@@ -1,17 +1,24 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
-import { setClickedUserAction, setCurrentUserAction } from "../../redux/user/user-actions";
+import {
+  setClickedUserAction,
+  setCurrentUserAction,
+} from "../../redux/user/user-actions";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 import "./Navigation.scss";
 
 const Navigation = ({ setNavOpen }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("user");
     dispatch(setCurrentUserAction(false));
+    history.push("/login");
   };
 
   const handleNavClose = () => {
@@ -30,13 +37,26 @@ const Navigation = ({ setNavOpen }) => {
       </div>
 
       <div className="Navigation__links">
-        <NavLink className="Navigation__links--link" exact to="/" onClick={handleNavClose}>
+        <NavLink
+          className="Navigation__links--link"
+          exact
+          to="/"
+          onClick={handleNavClose}
+        >
           Recettes
         </NavLink>
-        <NavLink className="Navigation__links--link" to="/publier" onClick={handleNavClose}>
+        <NavLink
+          className="Navigation__links--link"
+          to="/publier"
+          onClick={handleNavClose}
+        >
           Publier
         </NavLink>
-        <NavLink className="Navigation__links--link" to="/favoris" onClick={handleNavClose}>
+        <NavLink
+          className="Navigation__links--link"
+          to="/favoris"
+          onClick={handleNavClose}
+        >
           Favoris
         </NavLink>
         <NavLink
@@ -49,7 +69,11 @@ const Navigation = ({ setNavOpen }) => {
         >
           Compte
         </NavLink>
-        <NavLink className="Navigation__links--link" to="/parametres" onClick={handleNavClose}>
+        <NavLink
+          className="Navigation__links--link"
+          to="/parametres"
+          onClick={handleNavClose}
+        >
           Paramètres
         </NavLink>
       </div>
