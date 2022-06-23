@@ -1,9 +1,12 @@
-import { client } from ".."
+import { client } from "..";
 
-export const loginService = (email, password) => {
+export const loginService = async (email, password) => {
   const data = {
     email,
-    password
-  }
-  return client().post('users/login', data).then(res => res).catch(error => Promise.reject(error))
-}
+    password,
+  };
+  return await client()
+    .post("users/login", data)
+    .then((res) => res)
+    .catch((error) => Promise.reject(error));
+};
