@@ -1,10 +1,10 @@
 export const authHeader = () => {
-  let token = JSON.parse(localStorage.getItem('jwt'));
-  if (token) {
-    // axios.defaults.headers.common['Authorization'] = `Token ${user.token}`;
-    return 'Bearer ' + token;
-  } else {
-    // delete axios.defaults.headers.common['Authorization'];
-    return;
+  let localStorageJWT = localStorage.getItem("jwt");
+
+  if (localStorageJWT && localStorageJWT !== "undefined") {
+    let token = JSON.parse(localStorageJWT);
+    return "Bearer " + token;
   }
-}
+
+  return;
+};

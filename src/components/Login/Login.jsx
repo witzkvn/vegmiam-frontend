@@ -20,6 +20,7 @@ const Login = () => {
 
     try {
       const response = await loginService(email, password);
+      console.log(response);
       if (response) {
         localStorage.setItem("jwt", JSON.stringify(response.data.token));
         localStorage.setItem("user", JSON.stringify(response.data.data.user));
